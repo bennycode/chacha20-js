@@ -1,0 +1,4 @@
+.idea/**/*.xml
+!.idea/codeStyleSettings.xml
+/nbproject/private/
+/node_modules/

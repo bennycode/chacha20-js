@@ -1,0 +1,16 @@
+{
+  "name": "chacha20-js",
+  "version": "0.1.0",
+  "description": "JavaScript implementation of the ChaCha20 stream cipher",
+  "license": "MIT",
+  "main": "src/chacha20.js",
+  "keywords": [
+    "chacha20",
+    "javascript",
+    "cipher",
+	"stream",
+	"crypto",
+	"salsa20",
+	"algorithm"
+  ]
+}

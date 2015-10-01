@@ -1,0 +1,12 @@
+{
+  "name": "chacha20-js",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.4",
+    "grunt-contrib-uglify": "~0.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bennyn/chacha20-js.git"
+  }
+}

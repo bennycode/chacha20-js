@@ -23,7 +23,7 @@ function ChaCha20(key, nonce) {
   }
 }
 
-ChaCha20.prototype.generateKeyStream = function (dst, src) {
+ChaCha20.prototype.generateKeyStream = function (destionation, source) {
   var buf = new Array(64);
   var ctx = this.context;
   var dpos = 0;
@@ -81,12 +81,12 @@ ChaCha20.prototype.generateKeyStream = function (dst, src) {
     }
     if (len <= 64) {
       for (i = len; i--; ) {
-        dst[i + dpos] = src[i + spos] ^ buf[i];
+        destionation[i + dpos] = source[i + spos] ^ buf[i];
       }
       return;
     }
     for (i = 64; i--; ) {
-      dst[i + dpos] = src[i + spos] ^ buf[i];
+      destionation[i + dpos] = source[i + spos] ^ buf[i];
     }
     len -= 64;
     spos += 64;

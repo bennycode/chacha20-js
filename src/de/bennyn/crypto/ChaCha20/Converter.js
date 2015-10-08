@@ -82,7 +82,7 @@ de.bennyn.crypto.ChaCha20.Converter = {
     return bytes;
   },
   stringToHex: function (input) {
-    var character = undefined;
+    var character = '';
     var i = 0;
     var string = '';
     var tempLength = input.length;

@@ -8,9 +8,9 @@
     "chacha20",
     "javascript",
     "cipher",
-	"stream",
-	"crypto",
-	"salsa20",
-	"algorithm"
+    "stream",
+    "crypto",
+    "salsa20",
+    "algorithm"
   ]
 }

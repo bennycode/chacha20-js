@@ -5,9 +5,11 @@ de.bennyn.crypto.ChaCha20.Converter = {
    * @param {type} Converted array
    * @see https://developer.mozilla.org/en/docs/Web/JavaScript/Typed_arrays
    */
+  // load32
   u8to32_le: function (x, i) {
     return x[i] | (x[i + 1] << 8) | (x[i + 2] << 16) | (x[i + 3] << 24);
   },
+  // store32
   u32to8_le: function (x, i, u) {
     x[i] = u;
     u >>>= 8;
@@ -20,6 +22,7 @@ de.bennyn.crypto.ChaCha20.Converter = {
 
     x[i + 3] = u;
   },
+  // rotl32
   rotate: function (v, c) {
     return (v << c) | (v >>> (32 - c));
   },
@@ -121,23 +124,25 @@ de.bennyn.crypto.ChaCha20.Converter = {
   arrayBufferToString: function (buffer) {
     return String.fromCharCode.apply(null, buffer);
   },
+  // in-place editing?
   concatenateArrayBuffers: function () {
-    var args, array_buffer_view, concatenated_buffer, first_buffer, index, return_buffer, second_buffer;
-    args = Array.prototype.slice.call(arguments);
-    return_buffer = args[0];
+    var args = Array.prototype.slice.call(arguments);
+    var destionationBuffer = args[0];
+
     if (args.length > 1) {
-      first_buffer = args.shift();
-      var concatenated_buffer = undefined;
-      for (index in args) {
-        array_buffer_view = args[index];
-        second_buffer = array_buffer_view;
-        concatenated_buffer = new window[first_buffer.constructor.name](first_buffer.byteLength + second_buffer.byteLength);
-        concatenated_buffer.set(first_buffer, 0);
-        concatenated_buffer.set(second_buffer, first_buffer.byteLength);
-        first_buffer = concatenated_buffer;
+      var firstBuffer = args.shift();
+      var concatenatedBuffer = undefined;
+      for (var index in args) {
+        var arrayBufferView = args[index];
+        var temporaryBuffer = arrayBufferView;
+        concatenatedBuffer = new window[firstBuffer.constructor.name](firstBuffer.byteLength + temporaryBuffer.byteLength);
+        concatenatedBuffer.set(firstBuffer, 0);
+        concatenatedBuffer.set(temporaryBuffer, firstBuffer.byteLength);
+        firstBuffer = concatenatedBuffer;
       }
-      return_buffer = concatenated_buffer;
+      destionationBuffer = concatenatedBuffer;
     }
-    return return_buffer;
+
+    return destionationBuffer;
   }
 };

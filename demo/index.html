@@ -40,8 +40,8 @@
       var context = new de.bennyn.crypto.ChaCha20.ChaCha20(vectorBufferView, nonceBufferView);
 
       var destination = new Uint8Array(keyStreamLength >> 1);
-      context.generateKeyStream(destination, destination, keyStreamLength);
-      console.log('Result 1 (Hex)', de.bennyn.crypto.ChaCha20.Converter.byteArrayToHex(destination));
+      context.generateKeyStream(destination, keyStreamLength);
+      console.log('Result 1 (Hex)', context.getKeyStreamAsHex());
 
       // libsodium.js
       var message = new Uint8Array(keyStreamLength >> 1);

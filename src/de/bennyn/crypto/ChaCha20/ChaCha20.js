@@ -1,6 +1,7 @@
 de.bennyn.crypto.ChaCha20.ChaCha20 = (function () {
   function ChaCha20(key, nonce, counter) {
     this.input = new Uint32Array(16);
+    this.keyStream = undefined;
 
     if (counter === undefined) {
       counter = 0;
@@ -49,7 +50,12 @@ de.bennyn.crypto.ChaCha20.ChaCha20 = (function () {
     x[b] = de.bennyn.crypto.ChaCha20.Converter.rotate(x[b] ^ x[c], 7);
   };
 
-  ChaCha20.prototype.generateKeyStream = function (destination, source, keyStreamLength) {
+  ChaCha20.prototype.getKeyStreamAsHex = function () {
+    return de.bennyn.crypto.ChaCha20.Converter.byteArrayToHex(this.keyStream);
+  };
+
+  ChaCha20.prototype.generateKeyStream = function (source, keyStreamLength) {
+    this.keyStream = new Uint8Array(keyStreamLength >> 1);
     var input = this.input;
 
     // Encode
@@ -87,13 +93,13 @@ de.bennyn.crypto.ChaCha20.ChaCha20 = (function () {
 
       if (keyStreamLength <= 64) {
         for (i = keyStreamLength; i--; ) {
-          destination[i + dpos] = source[i + spos] ^ buf[i];
+          this.keyStream[i + dpos] = source[i + spos] ^ buf[i];
         }
         return;
       }
 
       for (i = 64; i--; ) {
-        destination[i + dpos] = source[i + spos] ^ buf[i];
+        this.keyStream[i + dpos] = source[i + spos] ^ buf[i];
       }
 
       keyStreamLength -= 64;

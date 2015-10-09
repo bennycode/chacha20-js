@@ -4,51 +4,25 @@
     <title>chacha20-js</title>
     <meta charset="UTF-8" />
     <script src="../src/de/bennyn/crypto/ChaCha20/namespace.js"></script>
-    <script src="../src/de/bennyn/crypto/ChaCha20/Key.js"></script>
+    <script src="../src/de/bennyn/crypto/ChaCha20/InsufficientArgumentsError.js"></script>
     <script src="../src/de/bennyn/crypto/ChaCha20/Converter.js"></script>
-    <script src="../src/de/bennyn/crypto/ChaCha20/ChaCha20.js"></script>
+    <script src="../src/de/bennyn/crypto/ChaCha20/ByteRepresentation.js"></script>
+    <script src="../src/de/bennyn/crypto/ChaCha20/Vector.js"></script>
+    <script src="../src/de/bennyn/crypto/ChaCha20/Context.js"></script>
     <script src="../lib/libsodium.js/dist/browsers/combined/sodium.min.js"></script>
   </head>
   <body>
     <script>
       // https://tools.ietf.org/html/draft-agl-tls-chacha20poly1305-00#section-7
-      var vector = '0000000000000000000000000000000000000000000000000000000000000000';
-      var vectorArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-      var vectorBuffer = new ArrayBuffer(vectorArray.length);
-      var vectorBufferView = new Uint8Array(vectorBuffer, vectorArray);
-      var vectorInBytes = de.bennyn.crypto.ChaCha20.Converter.hexStringToByteArray(vector);
-      for (var i = 0, length = vectorArray.length; i < length; i++) {
-        vectorBufferView[i] = vectorArray[i];
-      }
-      console.log('KEY', vectorBufferView);
-
-      var nonce = '0000000000000000';
-      var nonceArray = [0, 0, 0, 0, 0, 0, 0, 0];
-      var nonceBuffer = new ArrayBuffer(nonceArray.length);
-      var nonceBufferView = new Uint8Array(nonceBuffer, nonceArray);
-      var nonceInBytes = de.bennyn.crypto.ChaCha20.Converter.hexStringToByteArray(nonce);
-      for (var i = 0, length = nonceArray.length; i < length; i++) {
-        nonceBufferView[i] = nonceArray[i];
-      }
-      console.log('NONCE', nonceBufferView);
-
-      var keyStreamPrefix = '76b8e0ada0f13d90405d6ae55386bd28bdd219b8a08ded1aa836efcc8b770dc7da41597c5157488d7724e03fb8d84a376a43b8f41518a11cc387b669b2ee6586';
-      var keyStreamLength = keyStreamPrefix.length;
-      console.log('KEYSTREAM', keyStreamPrefix);
-
-      // chacha20-js
-      var context = new de.bennyn.crypto.ChaCha20.ChaCha20(vectorBufferView, nonceBufferView);
-
-      var destination = new Uint8Array(keyStreamLength >> 1);
-      context.generateKeyStream(destination, keyStreamLength);
-      console.log('Result 1 (Hex)', context.getKeyStreamAsHex());
-
-      // libsodium.js
-      var message = new Uint8Array(keyStreamLength >> 1);
-      var result = sodium.crypto_stream_chacha20_xor_ic(message, sodium.from_hex(nonce), 0, sodium.from_hex(vector), 'hex');
-      console.log('Result 2 (Hex)', result);
-
-      // console.log('Bytes equal: ' + de.bennyn.crypto.ChaCha20.Converter.bytesEqual(keyStreamPrefix, destination_1));
+      var testVector = {
+        key: '0000000000000000000000000000000000000000000000000000000000000000',
+        nonce: '0000000000000000',
+        prefix: '76b8e0ada0f13d90405d6ae55386bd28bdd219b8a08ded1aa836efcc8b770dc7da41597c5157488d7724e03fb8d84a376a43b8f41518a11cc387b669'
+      };
+      var vector = new de.bennyn.crypto.ChaCha20.Vector(testVector.key, testVector.nonce, testVector.prefix);
+      var context = new de.bennyn.crypto.ChaCha20.Context(vector.getKey().getBufferView(), vector.getNonce().getBufferView());
+      context.generateKeyStream(vector.getKeyStreamLength());
+      console.log('Result: ' + context.getKeyStreamAsHex());
     </script>
   </body>
 </html>

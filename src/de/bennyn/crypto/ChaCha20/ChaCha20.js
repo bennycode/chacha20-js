@@ -49,64 +49,19 @@ de.bennyn.crypto.ChaCha20.ChaCha20 = (function () {
     x[b] = de.bennyn.crypto.ChaCha20.Converter.rotate(x[b] ^ x[c], 7);
   };
 
-  ChaCha20.prototype.encrypt = function (dst, src, len) {
-    var x = new Uint32Array(16);
-    var output = new Uint8Array(64);
-    var i, dpos = 0, spos = 0;
-
-    while (len > 0) {
-      for (i = 16; i--; )
-        x[i] = this.input[i];
-      for (i = 20; i > 0; i -= 2) {
-        this.quarterRound(x, 0, 4, 8, 12);
-        this.quarterRound(x, 1, 5, 9, 13);
-        this.quarterRound(x, 2, 6, 10, 14);
-        this.quarterRound(x, 3, 7, 11, 15);
-        this.quarterRound(x, 0, 5, 10, 15);
-        this.quarterRound(x, 1, 6, 11, 12);
-        this.quarterRound(x, 2, 7, 8, 13);
-        this.quarterRound(x, 3, 4, 9, 14);
-      }
-
-      for (i = 16; i--; ) {
-        x[i] += this.input[i];
-      }
-      for (i = 16; i--; ) {
-        de.bennyn.crypto.ChaCha20.Converter.u32to8_le(output, 4 * i, x[i]);
-      }
-
-      this.input[12] += 1;
-      if (!this.input[12]) {
-        this.input[13] += 1;
-      }
-      if (len <= 64) {
-        for (i = len; i--; ) {
-          dst[i + dpos] = src[i + spos] ^ output[i];
-        }
-        return;
-      }
-      for (i = 64; i--; ) {
-        dst[i + dpos] = src[i + spos] ^ output[i];
-      }
-      len -= 64;
-      spos += 64;
-      dpos += 64;
-    }
-  };
-
-  ChaCha20.prototype.generateKeyStream = function (dst, src, len) {
+  ChaCha20.prototype.generateKeyStream = function (destination, source, keyStreamLength) {
     var input = this.input;
-    
+
     // Encode
     var x = new Array(16);
     var buf = new Array(64);
     var i = 0, dpos = 0, spos = 0;
 
-    while (len > 0) {
+    while (keyStreamLength > 0) {
       for (i = 16; i--; ) {
         x[i] = input[i];
       }
-      
+
       for (i = 20; i > 0; i -= 2) {
         this.quarterRound(x, 0, 4, 8, 12);
         this.quarterRound(x, 1, 5, 9, 13);
@@ -129,19 +84,19 @@ de.bennyn.crypto.ChaCha20.ChaCha20 = (function () {
       if (!input[12]) {
         input[13] += 1;
       }
-      
-      if (len <= 64) {
-        for (i = len; i--; ) {
-          dst[i + dpos] = src[i + spos] ^ buf[i];
+
+      if (keyStreamLength <= 64) {
+        for (i = keyStreamLength; i--; ) {
+          destination[i + dpos] = source[i + spos] ^ buf[i];
         }
         return;
       }
-      
+
       for (i = 64; i--; ) {
-        dst[i + dpos] = src[i + spos] ^ buf[i];
+        destination[i + dpos] = source[i + spos] ^ buf[i];
       }
-      
-      len -= 64;
+
+      keyStreamLength -= 64;
       spos += 64;
       dpos += 64;
     }

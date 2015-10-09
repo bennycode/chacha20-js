@@ -1,0 +1,6 @@
+{
+  "code_coverage": "build/coverage",
+  "external_libraries": "lib",
+  "source_code": "src",
+  "test_specifications": "test/specs"
+}

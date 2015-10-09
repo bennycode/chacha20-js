@@ -12,5 +12,8 @@
     "crypto",
     "salsa20",
     "algorithm"
-  ]
+  ],
+  "devDependencies": {
+    "libsodium.js": "git@github.com:wearezeta/libsodium.js#master"
+  }
 }

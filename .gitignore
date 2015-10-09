@@ -1,4 +1,6 @@
 .idea/**/*.xml
 !.idea/codeStyleSettings.xml
+/bower_components/
+/lib/
 /nbproject/private/
 /node_modules/

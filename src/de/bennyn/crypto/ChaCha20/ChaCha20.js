@@ -94,15 +94,10 @@ de.bennyn.crypto.ChaCha20.ChaCha20 = (function () {
     }
   };
 
-  ChaCha20.prototype.keystream = function (dst, len) {
-    for (var i = 0; i < len; ++i) {
-      dst[i] = 0;
-    }
-    this.encrypt(dst, dst, len);
-  };
-
   ChaCha20.prototype.generateKeyStream = function (dst, src, len) {
     var input = this.input;
+    
+    // Encode
     var x = new Array(16);
     var buf = new Array(64);
     var i = 0, dpos = 0, spos = 0;
@@ -111,6 +106,7 @@ de.bennyn.crypto.ChaCha20.ChaCha20 = (function () {
       for (i = 16; i--; ) {
         x[i] = input[i];
       }
+      
       for (i = 20; i > 0; i -= 2) {
         this.quarterRound(x, 0, 4, 8, 12);
         this.quarterRound(x, 1, 5, 9, 13);
@@ -133,15 +129,18 @@ de.bennyn.crypto.ChaCha20.ChaCha20 = (function () {
       if (!input[12]) {
         input[13] += 1;
       }
+      
       if (len <= 64) {
         for (i = len; i--; ) {
           dst[i + dpos] = src[i + spos] ^ buf[i];
         }
         return;
       }
+      
       for (i = 64; i--; ) {
         dst[i + dpos] = src[i + spos] ^ buf[i];
       }
+      
       len -= 64;
       spos += 64;
       dpos += 64;

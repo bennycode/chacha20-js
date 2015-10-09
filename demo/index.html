@@ -7,9 +7,11 @@
     <script src="../src/de/bennyn/crypto/ChaCha20/Key.js"></script>
     <script src="../src/de/bennyn/crypto/ChaCha20/Converter.js"></script>
     <script src="../src/de/bennyn/crypto/ChaCha20/ChaCha20.js"></script>
+    <script src="../lib/libsodium.js/dist/browsers/combined/sodium.min.js"></script>
   </head>
   <body>
     <script>
+      // https://tools.ietf.org/html/draft-agl-tls-chacha20poly1305-00#section-7
       var vector = '0000000000000000000000000000000000000000000000000000000000000000';
       var vectorArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       var vectorBuffer = new ArrayBuffer(vectorArray.length);
@@ -34,17 +36,19 @@
       var keyStreamLength = keyStreamPrefix.length;
       console.log('KEYSTREAM', keyStreamPrefix);
 
+      // chacha20-js
       var context = new de.bennyn.crypto.ChaCha20.ChaCha20(vectorBufferView, nonceBufferView);
 
-      var destination_1 = new Array(keyStreamLength);
-      context.generateKeyStream(destination_1, destination_1, keyStreamLength);
-      console.log('Result 1', de.bennyn.crypto.ChaCha20.Converter.byteArrayToHex(destination_1));
+      var destination = new Uint8Array(keyStreamLength >> 1);
+      context.generateKeyStream(destination, destination, keyStreamLength);
+      console.log('Result 1 (Hex)', de.bennyn.crypto.ChaCha20.Converter.byteArrayToHex(destination));
 
-      var destination_2 = new Array(keyStreamLength);
-      context.keystream(destination_2, keyStreamLength);
-      console.log('Result 2', de.bennyn.crypto.ChaCha20.Converter.byteArrayToHex(destination_2));
+      // libsodium.js
+      var message = new Uint8Array(keyStreamLength >> 1);
+      var result = sodium.crypto_stream_chacha20_xor_ic(message, sodium.from_hex(nonce), 0, sodium.from_hex(vector), 'hex');
+      console.log('Result 2 (Hex)', result);
 
-      console.log('Bytes equal: ' + de.bennyn.crypto.ChaCha20.Converter.bytesEqual(keyStreamPrefix, destination_1));
+      // console.log('Bytes equal: ' + de.bennyn.crypto.ChaCha20.Converter.bytesEqual(keyStreamPrefix, destination_1));
     </script>
   </body>
 </html>

@@ -26,7 +26,7 @@ de.bennyn.crypto.ChaCha20.Converter = {
   rotate: function (v, c) {
     return (v << c) | (v >>> (32 - c));
   },
-  // fromHex
+  // from_hex
   hexStringToByteArray: function (hex) {
     hex.replace(' ', '');
 

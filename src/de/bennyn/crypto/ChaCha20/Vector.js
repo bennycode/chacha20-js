@@ -1,12 +1,17 @@
 de.bennyn.crypto.ChaCha20.Vector = (function () {
   function Class(key, nonce, keyStream) {
     var args = Array.prototype.slice.call(arguments);
-    if (args.length < 3) {
-      throw new de.bennyn.crypto.ChaCha20.InsufficientArgumentsError('Not enough parameters specified.');
-    } else {
+    if (args.length === 1) {
+      var vector = key;
+      this.key = new de.bennyn.crypto.ChaCha20.ByteRepresentation(vector.key);
+      this.keyStream = vector.prefix;
+      this.nonce = new de.bennyn.crypto.ChaCha20.ByteRepresentation(vector.nonce);
+    } else if (args.length === 3) {
       this.key = new de.bennyn.crypto.ChaCha20.ByteRepresentation(key);
       this.keyStream = keyStream;
       this.nonce = new de.bennyn.crypto.ChaCha20.ByteRepresentation(nonce);
+    } else {
+      throw new de.bennyn.crypto.ChaCha20.InsufficientArgumentsError();
     }
   }
 

@@ -2,6 +2,14 @@ de.bennyn.crypto.ChaCha20.Context = (function () {
   function Class(key, nonce, counter) {
     this.input = new Uint32Array(16);
     this.keyStream = undefined;
+    this.keyStreamLength = undefined;
+
+    if (key.constructor === de.bennyn.crypto.ChaCha20.Vector) {
+      var vector = key;
+      key = vector.getKey().getBufferView();
+      nonce = vector.getNonce().getBufferView();
+      this.keyStreamLength = vector.getKeyStreamLength();
+    }
 
     if (counter === undefined) {
       counter = 0;
@@ -59,11 +67,16 @@ de.bennyn.crypto.ChaCha20.Context = (function () {
   };
 
   Class.prototype.generateKeyStream = function (keyStreamLength, source) {
-    this.keyStream = new Uint8Array(keyStreamLength >> 1);
-    var input = this.input;
+    if (keyStreamLength === undefined) {
+      keyStreamLength = this.keyStreamLength;
+    }
+
     if (source === undefined) {
       source = new Uint8Array(keyStreamLength >> 1);
     }
+
+    this.keyStream = new Uint8Array(keyStreamLength >> 1);
+    var input = this.input;
 
     // Encode
     var x = new Array(16);
@@ -71,7 +84,7 @@ de.bennyn.crypto.ChaCha20.Context = (function () {
     var i = 0, dpos = 0, spos = 0;
 
     while (keyStreamLength > 0) {
-      for (i = 16; i--; ) {
+      for (i = 16; i--;) {
         x[i] = input[i];
       }
 
@@ -85,11 +98,12 @@ de.bennyn.crypto.ChaCha20.Context = (function () {
         this.quarterRound(x, 2, 7, 8, 13);
         this.quarterRound(x, 3, 4, 9, 14);
       }
-      for (i = 16; i--; ) {
+
+      for (i = 16; i--;) {
         x[i] += input[i];
       }
 
-      for (i = 16; i--; ) {
+      for (i = 16; i--;) {
         de.bennyn.crypto.ChaCha20.Converter.u32to8_le(buf, 4 * i, x[i]);
       }
 
@@ -99,13 +113,13 @@ de.bennyn.crypto.ChaCha20.Context = (function () {
       }
 
       if (keyStreamLength <= 64) {
-        for (i = keyStreamLength; i--; ) {
+        for (i = keyStreamLength; i--;) {
           this.keyStream[i + dpos] = source[i + spos] ^ buf[i];
         }
         return;
       }
 
-      for (i = 64; i--; ) {
+      for (i = 64; i--;) {
         this.keyStream[i + dpos] = source[i + spos] ^ buf[i];
       }
 

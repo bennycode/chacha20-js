@@ -8,8 +8,14 @@ module.exports = function (grunt) {
     dir: grunt.file.readJSON('./conf/grunt/globals/dir.json'),
     pkg: grunt.file.readJSON('package.json'),
     // Tasks
-    jasmine: require('./conf/grunt/tasks/jasmine.js')
+    clean: require('./conf/grunt/tasks/clean.js'),
+    jasmine: require('./conf/grunt/tasks/jasmine.js'),
+    uglify: require('./conf/grunt/tasks/uglify.js')
   });
 
-  grunt.registerTask('test', ['jasmine:test']);
+  grunt.registerTask('module-test', 'jasmine:test');
+  grunt.registerTask('module-distribute', [
+    'clean:dist',
+    'uglify:dist'
+  ]);
 };

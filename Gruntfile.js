@@ -10,11 +10,11 @@ module.exports = function (grunt) {
     // Tasks
     clean: require('./conf/grunt/tasks/clean.js'),
     jasmine: require('./conf/grunt/tasks/jasmine.js'),
-    uglify: require('./conf/grunt/tasks/uglify.js')
+    uglify: require('./conf/grunt/tasks/uglify.js'),
   });
 
-  grunt.registerTask('module-test', 'jasmine:test');
-  grunt.registerTask('module-distribute', [
+  grunt.registerTask('code-test', 'jasmine:test');
+  grunt.registerTask('code-dist', [
     'clean:dist',
     'uglify:dist'
   ]);

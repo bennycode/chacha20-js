@@ -34,18 +34,18 @@ describe('ChaCha20Poly1305 Test Vectors', function () {
 
     var context = new de.bennyn.crypto.ChaCha20.Context(firstVector);
     context.generateKeyStream();
-    expect(context.getKeyStreamAsHex()).toBe(vectors.A.prefix);
+    expect(context.getKeyStreamAsHex()).toContain(vectors.A.prefix);
 
     context = new de.bennyn.crypto.ChaCha20.Context(secondVector);
     context.generateKeyStream();
-    expect(context.getKeyStreamAsHex()).toBe(vectors.B.prefix);
+    expect(context.getKeyStreamAsHex()).toContain(vectors.B.prefix);
 
     context = new de.bennyn.crypto.ChaCha20.Context(thirdVector);
     context.generateKeyStream();
-    expect(context.getKeyStreamAsHex()).toBe(vectors.C.prefix);
+    expect(context.getKeyStreamAsHex()).toContain(vectors.C.prefix);
 
     context = new de.bennyn.crypto.ChaCha20.Context(fourthVector);
     context.generateKeyStream();
-    expect(context.getKeyStreamAsHex()).toBe(vectors.D.prefix);
+    expect(context.getKeyStreamAsHex()).toContain(vectors.D.prefix);
   });
 });

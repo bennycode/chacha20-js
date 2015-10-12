@@ -1,7 +1,8 @@
 {
   "code_coverage": "build/coverage",
+  "demo_code": "demo",
   "distributables": "dist",
   "external_libraries": "lib",
   "source_code": "src",
-  "test_specifications": "test/specs"
+  "test_specifications": "spec/test"
 }

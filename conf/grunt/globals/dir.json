@@ -3,6 +3,12 @@
   "demo_code": "demo",
   "distributables": "dist",
   "external_libraries": "lib",
+  "nightwatch": {
+    "config": "conf/nightwatch",
+    "report": "test/nightwatch/report",
+    "screenshots": "test/nightwatch/screenshots",
+    "tests": "test/nightwatch/tests"
+  },
   "source_code": {
     "js": "src/js",
     "css": "src/css"

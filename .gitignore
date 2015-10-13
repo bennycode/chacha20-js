@@ -4,4 +4,7 @@
 /dist/
 /lib/
 /nbproject/private/
+/test/nightwatch/report
+/test/nightwatch/screenshots
 /node_modules/
+/selenium-debug.log

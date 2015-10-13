@@ -10,12 +10,14 @@ module.exports = function (grunt) {
 
   var globals = {
     dir: grunt.file.readJSON('./conf/grunt/globals/dir.json'),
-    pkg: grunt.file.readJSON('package.json')
+    pkg: grunt.file.readJSON('package.json'),
+    server_port: grunt.file.readJSON('./conf/grunt/globals/server_port.json')
   };
 
   var options = {
     clean: require('./conf/grunt/options/clean.js'),
     jasmine: require('./conf/grunt/options/jasmine.js'),
+    nightwatch: require('./conf/grunt/options/nightwatch.js'),
     uglify: require('./conf/grunt/options/uglify.js')
   };
 

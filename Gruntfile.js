@@ -13,8 +13,8 @@ module.exports = function (grunt) {
     uglify: require('./conf/grunt/tasks/uglify.js'),
   });
 
-  grunt.registerTask('code-test', 'jasmine:test');
-  grunt.registerTask('code-dist', [
+  grunt.registerTask('test', 'jasmine:test');
+  grunt.registerTask('dist', [
     'clean:dist',
     'uglify:dist'
   ]);

@@ -1,21 +1,25 @@
 module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt, {
-    pattern: ['grunt-*', '!grunt-template-jasmine-istanbul']
+    pattern: [
+      'grunt-*',
+      '!grunt-template-jasmine-istanbul'
+    ]
   });
 
-  grunt.initConfig({
-    // Globals
+  var config = {};
+
+  var globals = {
     dir: grunt.file.readJSON('./conf/grunt/globals/dir.json'),
-    pkg: grunt.file.readJSON('package.json'),
-    // Tasks
+    pkg: grunt.file.readJSON('package.json')
+  };
+
+  var options = {
     clean: require('./conf/grunt/options/clean.js'),
     jasmine: require('./conf/grunt/options/jasmine.js'),
-    uglify: require('./conf/grunt/options/uglify.js'),
-  });
+    uglify: require('./conf/grunt/options/uglify.js')
+  };
 
-  grunt.registerTask('test', 'jasmine:test');
-  grunt.registerTask('dist', [
-    'clean:dist',
-    'uglify:dist'
-  ]);
+  grunt.util._.extend(config, globals, options);
+  grunt.initConfig(config);
+  grunt.loadTasks('./conf/grunt/tasks');
 };

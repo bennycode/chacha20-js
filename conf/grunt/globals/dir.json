@@ -3,6 +3,9 @@
   "demo_code": "demo",
   "distributables": "dist",
   "external_libraries": "lib",
-  "source_code": "src",
+  "source_code": {
+    "js": "src/js",
+    "css": "src/css"
+  },
   "test_specifications": "spec/test"
 }

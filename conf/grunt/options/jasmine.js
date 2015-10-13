@@ -1,7 +1,7 @@
 module.exports = {
   test: {
     src: [
-      '<%= dir.source_code %>/**/*.js'
+      '<%= dir.source_code.js %>/**/*.js'
     ]
   },
   options: {

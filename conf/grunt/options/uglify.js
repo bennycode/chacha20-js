@@ -5,7 +5,7 @@ module.exports = {
   dist: {
     files: {
       '<%= dir.distributables %>/<%= pkg.name %>.min.js': [
-        '<%= dir.source_code %>/**/*.js'
+        '<%= dir.source_code.js %>/**/*.js'
       ]
     },
     options: {

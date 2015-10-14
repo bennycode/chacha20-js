@@ -1,4 +1,4 @@
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   // Dependencies
   require('load-grunt-tasks')(grunt, {
     pattern: [
@@ -13,7 +13,7 @@ module.exports = function (grunt) {
     var object = {};
     var key;
 
-    glob.sync('*', {cwd: path}).forEach(function (option) {
+    glob.sync('*', {cwd: path}).forEach(function(option) {
       key = option.replace(/\.js$/, '');
       object[key] = require(path + option);
     });
@@ -25,8 +25,12 @@ module.exports = function (grunt) {
   var config = {
     dir: grunt.file.readJSON('./conf/grunt/globals/dir.json'),
     pkg: grunt.file.readJSON('package.json'),
-    server_port: grunt.file.readJSON('./conf/grunt/globals/server_port.json')
+    server: grunt.file.readJSON('./conf/grunt/globals/server.json')
   };
+
+  grunt.event.on('watch', function(action, filepath, target) {
+    grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
+  });
 
   // Initialization
   grunt.util._.extend(config, concatenateFiles('./conf/grunt/options/'));

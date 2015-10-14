@@ -1,8 +1,10 @@
-module.exports = function (grunt) {
-  grunt.registerTask('default', function () {
+module.exports = function(grunt) {
+  grunt.registerTask('default', function() {
     grunt.task.run([
       'test',
-      'dist'
+      'dist',
+      'connect:serve',
+      'watch'
     ]);
   });
 };

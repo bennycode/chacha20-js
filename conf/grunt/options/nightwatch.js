@@ -9,7 +9,7 @@ module.exports = {
       "default": {
         "launch_url": "https://app.wire.com/auth/#login",
         "selenium_host": "localhost",
-        "selenium_port": '<%= server_port.selenium %>',
+        "selenium_port": '<%= server.port.selenium %>',
         "silent": true,
         "use_xpath": true,
         "desiredCapabilities": {
@@ -27,7 +27,7 @@ module.exports = {
     },
     "selenium": {
       "host": "127.0.0.1",
-      "port": '<%= server_port.selenium %>',
+      "port": '<%= server.port.selenium %>',
       "cli_args": {
         "webdriver.chrome.driver": "",
         "webdriver.ie.driver": ""

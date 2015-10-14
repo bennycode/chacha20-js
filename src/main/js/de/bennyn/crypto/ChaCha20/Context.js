@@ -66,22 +66,12 @@ de.bennyn.crypto.ChaCha20.Context = (function() {
     return de.bennyn.crypto.ChaCha20.Converter.byteArrayToHex(this.keyStream);
   };
 
-  Class.prototype.generateKeyStream = function(keyStreamLength, source) {
-    if (keyStreamLength === undefined) {
-      keyStreamLength = this.keyStreamLength;
-    }
-
-    if (source === undefined) {
-      source = new Uint8Array(keyStreamLength >> 1);
-    }
-
-    this.keyStream = new Uint8Array(keyStreamLength >> 1);
-    var input = this.input;
-
-    // Encode
-    var x = new Array(16);
+  Class.prototype.encrypt = function(source, input, keyStreamLength) {
     var buf = new Array(64);
-    var i = 0, dpos = 0, spos = 0;
+    var dpos = 0;
+    var i = 0;
+    var spos = 0;
+    var x = new Array(16);
 
     while (keyStreamLength > 0) {
       for (i = 16; i--;) {
@@ -127,6 +117,20 @@ de.bennyn.crypto.ChaCha20.Context = (function() {
       spos += 64;
       dpos += 64;
     }
+  };
+
+  Class.prototype.generateKeyStream = function(keyStreamLength, source) {
+    if (keyStreamLength === undefined) {
+      keyStreamLength = this.keyStreamLength;
+    }
+
+    if (source === undefined) {
+      source = new Uint8Array(keyStreamLength >> 1);
+    }
+
+    this.keyStream = new Uint8Array(keyStreamLength >> 1);
+
+    this.encrypt(source, this.input, keyStreamLength);
   };
 
   return Class;

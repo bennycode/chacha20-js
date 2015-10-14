@@ -3,6 +3,9 @@
   "demo_code": "demo",
   "distributables": "dist",
   "external_libraries": "lib",
+  "jasmine": {
+    "test_specifications": "test/jasmine/specs"
+  },
   "nightwatch": {
     "config": "conf/nightwatch",
     "report": "test/nightwatch/report",
@@ -12,6 +15,5 @@
   "source_code": {
     "js": "src/js",
     "css": "src/css"
-  },
-  "test_specifications": "spec/test"
+  }
 }

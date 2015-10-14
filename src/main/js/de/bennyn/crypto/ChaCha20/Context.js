@@ -66,14 +66,21 @@ de.bennyn.crypto.ChaCha20.Context = (function() {
     return de.bennyn.crypto.ChaCha20.Converter.byteArrayToHex(this.keyStream);
   };
 
-  Class.prototype.encrypt = function(source, input, keyStreamLength) {
+  /**
+   *
+   * @param destination - Where the output should be stored
+   * @param source - Text to be encrypted (as "Uint8Array")
+   * @param input - new Uint32Array(16)
+   * @param length - Length of the "source"
+   */
+  Class.prototype.encrypt = function(destination, source, input, length) {
     var buf = new Array(64);
     var dpos = 0;
     var i = 0;
     var spos = 0;
     var x = new Array(16);
 
-    while (keyStreamLength > 0) {
+    while (length > 0) {
       for (i = 16; i--;) {
         x[i] = input[i];
       }
@@ -102,18 +109,18 @@ de.bennyn.crypto.ChaCha20.Context = (function() {
         input[13] += 1;
       }
 
-      if (keyStreamLength <= 64) {
-        for (i = keyStreamLength; i--;) {
-          this.keyStream[i + dpos] = source[i + spos] ^ buf[i];
+      if (length <= 64) {
+        for (i = length; i--;) {
+          destination[i + dpos] = source[i + spos] ^ buf[i];
         }
         return;
       }
 
       for (i = 64; i--;) {
-        this.keyStream[i + dpos] = source[i + spos] ^ buf[i];
+        destination[i + dpos] = source[i + spos] ^ buf[i];
       }
 
-      keyStreamLength -= 64;
+      length -= 64;
       spos += 64;
       dpos += 64;
     }
@@ -130,7 +137,7 @@ de.bennyn.crypto.ChaCha20.Context = (function() {
 
     this.keyStream = new Uint8Array(keyStreamLength >> 1);
 
-    this.encrypt(source, this.input, keyStreamLength);
+    this.encrypt(this.keyStream, source, this.input, keyStreamLength);
   };
 
   return Class;

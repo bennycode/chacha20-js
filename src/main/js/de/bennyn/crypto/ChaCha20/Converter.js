@@ -107,9 +107,10 @@ de.bennyn.crypto.ChaCha20.Converter = {
     return byte_array;
   },
   /*
+   * Returns an Array Buffer View of a given String.
    * @see https://developers.google.com/web/updates/2012/06/How-to-convert-ArrayBuffer-to-and-from-String?hl=en
    */
-  stringToArrayBufferView: function(string) {
+  stringToUint16Array: function(string) {
     var arrayBuffer = new ArrayBuffer(string.length * 2);
     var bufferView = new Uint16Array(arrayBuffer);
     var i = 0;
@@ -120,6 +121,14 @@ de.bennyn.crypto.ChaCha20.Converter = {
       i++;
     }
     return bufferView;
+  },
+  stringToUint8Array: function(str) {
+    var strUtf8 = window.decodeURI(encodeURIComponent(str));
+    var ab = new Uint8Array(strUtf8.length);
+    for (var i = 0; i < strUtf8.length; i++) {
+      ab[i] = strUtf8.charCodeAt(i);
+    }
+    return ab;
   },
   arrayBufferToString: function(buffer) {
     return String.fromCharCode.apply(null, buffer);

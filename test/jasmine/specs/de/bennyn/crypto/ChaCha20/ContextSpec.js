@@ -1,8 +1,8 @@
 /* global expect */
 
 // https://tools.ietf.org/html/draft-agl-tls-chacha20poly1305-00#section-7
-describe('ChaCha20Poly1305 Test Vectors', function () {
-  it('is compliant with IETF test vectors', function () {
+describe('ChaCha20Poly1305 Test Vectors', function() {
+  it('is compliant with IETF test vectors', function() {
     var vectors = {
       "A": {
         key: '0000000000000000000000000000000000000000000000000000000000000000',
@@ -47,5 +47,32 @@ describe('ChaCha20Poly1305 Test Vectors', function () {
     context = new de.bennyn.crypto.ChaCha20.Context(fourthVector);
     context.generateKeyStream();
     expect(context.getKeyStreamAsHex()).toContain(vectors.D.prefix);
+  });
+});
+
+describe('Encryption', function() {
+  xit('can encrypt a text message', function() {
+    var key = new ArrayBuffer(32);
+    var keyBufferView = new Uint8Array(key);
+    for (var i = 0; i < keyBufferView.length; i++) {
+      keyBufferView[i] = 0;
+    }
+
+    var nonce = new ArrayBuffer(8);
+    var nonceBufferView = new Uint8Array(nonce);
+    for (var i = 0; i < nonceBufferView.length; i++) {
+      nonceBufferView[i] = 0;
+    }
+
+    var source = de.bennyn.crypto.ChaCha20.Converter.stringToUint8Array("testing");
+    var input = new Uint32Array(16);
+    var length = source.length;
+    var destination = new Uint8Array(8);
+
+    var context = new de.bennyn.crypto.ChaCha20.Context(key, nonce);
+    context.encrypt(destination, source, input, length);
+
+    var cipherText = de.bennyn.crypto.ChaCha20.Converter.byteArrayToHex(destination);
+    expect(cipherText).toContain("02dd93d9c99f5a");
   });
 });

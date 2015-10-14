@@ -1,4 +1,4 @@
-de.bennyn.crypto.ChaCha20.ByteRepresentation = (function () {
+de.bennyn.crypto.ChaCha20.ByteRepresentation = (function() {
   function Class(hexString) {
     this.plain = hexString;
     this.byteArray = de.bennyn.crypto.ChaCha20.Converter.hexStringToByteArray(this.plain);
@@ -12,28 +12,28 @@ de.bennyn.crypto.ChaCha20.ByteRepresentation = (function () {
   /**
    * @returns {String}
    */
-  Class.prototype.getPlain = function () {
+  Class.prototype.getPlain = function() {
     return this.plain;
   };
 
   /**
    * @returns {Array}
    */
-  Class.prototype.getByteArray = function () {
+  Class.prototype.getByteArray = function() {
     return this.byteArray;
   };
 
   /**
    * @returns {ArrayBuffer}
    */
-  Class.prototype.getArrayBuffer = function () {
+  Class.prototype.getArrayBuffer = function() {
     return this.arrayBuffer;
   };
 
   /**
    * @returns {Uint8Array}
    */
-  Class.prototype.getBufferView = function () {
+  Class.prototype.getBufferView = function() {
     return this.bufferView;
   };
 

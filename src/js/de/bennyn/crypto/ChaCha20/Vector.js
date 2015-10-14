@@ -1,4 +1,4 @@
-de.bennyn.crypto.ChaCha20.Vector = (function () {
+de.bennyn.crypto.ChaCha20.Vector = (function() {
   function Class(key, nonce, keyStream) {
     var args = Array.prototype.slice.call(arguments);
     if (args.length === 1) {
@@ -18,28 +18,28 @@ de.bennyn.crypto.ChaCha20.Vector = (function () {
   /**
    * @returns {de.bennyn.crypto.ChaCha20.ByteRepresentation}
    */
-  Class.prototype.getKey = function () {
+  Class.prototype.getKey = function() {
     return this.key;
   };
 
   /**
    * @returns {String}
    */
-  Class.prototype.getKeyStream = function () {
+  Class.prototype.getKeyStream = function() {
     return this.keyStream;
   };
 
   /**
    * @returns {Integer}
    */
-  Class.prototype.getKeyStreamLength = function () {
+  Class.prototype.getKeyStreamLength = function() {
     return this.keyStream.length;
   };
 
   /**
    * @returns {de.bennyn.crypto.ChaCha20.ByteRepresentation}
    */
-  Class.prototype.getNonce = function () {
+  Class.prototype.getNonce = function() {
     return this.nonce;
   };
 

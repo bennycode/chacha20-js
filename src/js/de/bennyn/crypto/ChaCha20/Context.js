@@ -1,4 +1,4 @@
-de.bennyn.crypto.ChaCha20.Context = (function () {
+de.bennyn.crypto.ChaCha20.Context = (function() {
   function Class(key, nonce, counter) {
     this.input = new Uint32Array(16);
     this.keyStream = undefined;
@@ -44,7 +44,7 @@ de.bennyn.crypto.ChaCha20.Context = (function () {
   }
 
   // chacha20_round
-  Class.prototype.quarterRound = function (x, a, b, c, d) {
+  Class.prototype.quarterRound = function(x, a, b, c, d) {
     x[a] += x[b];
     x[d] = de.bennyn.crypto.ChaCha20.Converter.rotate(x[d] ^ x[a], 16);
 
@@ -58,15 +58,15 @@ de.bennyn.crypto.ChaCha20.Context = (function () {
     x[b] = de.bennyn.crypto.ChaCha20.Converter.rotate(x[b] ^ x[c], 7);
   };
 
-  Class.prototype.getKeyStream = function () {
+  Class.prototype.getKeyStream = function() {
     return this.keyStream;
   };
 
-  Class.prototype.getKeyStreamAsHex = function () {
+  Class.prototype.getKeyStreamAsHex = function() {
     return de.bennyn.crypto.ChaCha20.Converter.byteArrayToHex(this.keyStream);
   };
 
-  Class.prototype.generateKeyStream = function (keyStreamLength, source) {
+  Class.prototype.generateKeyStream = function(keyStreamLength, source) {
     if (keyStreamLength === undefined) {
       keyStreamLength = this.keyStreamLength;
     }

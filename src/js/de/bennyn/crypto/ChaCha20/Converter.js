@@ -6,11 +6,11 @@ de.bennyn.crypto.ChaCha20.Converter = {
    * @see https://developer.mozilla.org/en/docs/Web/JavaScript/Typed_arrays
    */
   // load32
-  u8to32_le: function (x, i) {
+  u8to32_le: function(x, i) {
     return x[i] | (x[i + 1] << 8) | (x[i + 2] << 16) | (x[i + 3] << 24);
   },
   // store32
-  u32to8_le: function (x, i, u) {
+  u32to8_le: function(x, i, u) {
     x[i] = u;
     u >>>= 8;
 
@@ -23,11 +23,11 @@ de.bennyn.crypto.ChaCha20.Converter = {
     x[i + 3] = u;
   },
   // rotl32
-  rotate: function (v, c) {
+  rotate: function(v, c) {
     return (v << c) | (v >>> (32 - c));
   },
   // from_hex
-  hexStringToByteArray: function (hex) {
+  hexStringToByteArray: function(hex) {
     hex.replace(' ', '');
 
     var out = [];
@@ -46,7 +46,7 @@ de.bennyn.crypto.ChaCha20.Converter = {
 
     return out;
   },
-  bytesEqual: function (a, b) {
+  bytesEqual: function(a, b) {
     var dif = 0;
 
     if (a.length !== b.length) {
@@ -61,7 +61,7 @@ de.bennyn.crypto.ChaCha20.Converter = {
 
     return (dif & 1);
   },
-  byteArrayToHex: function (bytes) {
+  byteArrayToHex: function(bytes) {
     var hex = [];
     var i = 0;
 
@@ -73,7 +73,7 @@ de.bennyn.crypto.ChaCha20.Converter = {
 
     return hex.join('');
   },
-  hexToByteArray: function (hex) {
+  hexToByteArray: function(hex) {
     var bytes = [];
     var counter = 0;
 
@@ -84,7 +84,7 @@ de.bennyn.crypto.ChaCha20.Converter = {
 
     return bytes;
   },
-  stringToHex: function (input) {
+  stringToHex: function(input) {
     var character = '';
     var i = 0;
     var string = '';
@@ -97,7 +97,7 @@ de.bennyn.crypto.ChaCha20.Converter = {
     }
     return string;
   },
-  stringToByteArray: function (string) {
+  stringToByteArray: function(string) {
     var byte_array = [];
 
     for (var index in string) {
@@ -109,7 +109,7 @@ de.bennyn.crypto.ChaCha20.Converter = {
   /*
    * @see https://developers.google.com/web/updates/2012/06/How-to-convert-ArrayBuffer-to-and-from-String?hl=en
    */
-  stringToArrayBufferView: function (string) {
+  stringToArrayBufferView: function(string) {
     var arrayBuffer = new ArrayBuffer(string.length * 2);
     var bufferView = new Uint16Array(arrayBuffer);
     var i = 0;
@@ -121,11 +121,11 @@ de.bennyn.crypto.ChaCha20.Converter = {
     }
     return bufferView;
   },
-  arrayBufferToString: function (buffer) {
+  arrayBufferToString: function(buffer) {
     return String.fromCharCode.apply(null, buffer);
   },
   // in-place editing?
-  concatenateArrayBuffers: function () {
+  concatenateArrayBuffers: function() {
     var args = Array.prototype.slice.call(arguments);
     var destionationBuffer = args[0];
 

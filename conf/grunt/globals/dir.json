@@ -1,6 +1,12 @@
 {
   "code_coverage": "build/coverage",
-  "demo_code": "demo",
+  "demo_code_root": "demo",
+  "demo_code": {
+    "style": {
+      "css": "demo/styles",
+      "scss": "src/demo/scss"
+    }
+  },
   "distributables": "dist",
   "external_libraries": "lib",
   "jasmine": {
@@ -13,7 +19,7 @@
     "tests": "test/nightwatch/tests"
   },
   "source_code": {
-    "js": "src/js",
-    "css": "src/css"
+    "js": "src/main/js",
+    "css": "src/main/css"
   }
 }

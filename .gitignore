@@ -1,5 +1,6 @@
 .idea/**/*.xml
 !.idea/codeStyleSettings.xml
+.sass-cache
 /bower_components/
 /dist/
 /lib/

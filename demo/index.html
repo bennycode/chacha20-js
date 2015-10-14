@@ -2,15 +2,56 @@
 <html>
   <head>
     <title>chacha20-js</title>
+
     <meta charset="UTF-8"/>
-    <script src="../src/js/de/bennyn/crypto/ChaCha20.js"></script>
-    <script src="../src/js/de/bennyn/crypto/ChaCha20/InsufficientArgumentsError.js"></script>
-    <script src="../src/js/de/bennyn/crypto/ChaCha20/Converter.js"></script>
-    <script src="../src/js/de/bennyn/crypto/ChaCha20/ByteRepresentation.js"></script>
-    <script src="../src/js/de/bennyn/crypto/ChaCha20/Vector.js"></script>
-    <script src="../src/js/de/bennyn/crypto/ChaCha20/Context.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- Scripts -->
+    <script src="../src/main/js/de/bennyn/crypto/ChaCha20.js"></script>
+    <script src="../src/main/js/de/bennyn/crypto/ChaCha20/InsufficientArgumentsError.js"></script>
+    <script src="../src/main/js/de/bennyn/crypto/ChaCha20/Converter.js"></script>
+    <script src="../src/main/js/de/bennyn/crypto/ChaCha20/ByteRepresentation.js"></script>
+    <script src="../src/main/js/de/bennyn/crypto/ChaCha20/Vector.js"></script>
+    <script src="../src/main/js/de/bennyn/crypto/ChaCha20/Context.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
   </head>
   <body>
+    <header class="app-bar promote-layer">
+      <div class="app-bar-container">
+        <button class="menu"><img src="images/hamburger.svg" alt="Menu"></button>
+        <h1 class="logo">Web <strong>Starter Kit</strong></h1>
+        <section class="app-bar-actions">
+          <!-- Put App Bar Buttons Here -->
+          <!-- e.g <button><i class="icon icon-star"></i></button> -->
+        </section>
+      </div>
+    </header>
+
+    <nav class="navdrawer-container promote-layer">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#hello">Hello</a></li>
+        <li><a href="#get-started">Get Started</a></li>
+        <li><a href="styleguide.html">Style Guide</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <h1 id="hello">Hello!</h1>
+
+      <p>Welcome to Web Starter Kit.</p>
+
+      <h2 id="get-started">Get Started.</h2>
+
+      <p>Read how to <a href="https://developers.google.com/web/starter-kit">Get Started</a> or check out the
+        <a href="styleguide.html">Style Guide</a>.</p>
+    </main>
+
+    <script src="scripts/main.js"></script>
+
     <script>
       // https://tools.ietf.org/html/draft-agl-tls-chacha20poly1305-00#section-7
       var testVector = {

@@ -4,7 +4,7 @@ module.exports = {
   },
   html: {
     files: [
-      '<%= dir.demo_code %>/**/*.html'
+      '<%= dir.demo_code_root %>/**/*.html'
     ]
   },
   js: {

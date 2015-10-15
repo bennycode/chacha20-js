@@ -1,15 +1,6 @@
 de.bennyn.crypto.ChaCha20.Context = (function() {
   function Class(key, nonce, counter) {
     this.input = new Uint32Array(16);
-    this.keyStream = undefined;
-    this.keyStreamLength = undefined;
-
-    if (key.constructor === de.bennyn.crypto.ChaCha20.Vector) {
-      var vector = key;
-      key = vector.getKey().getBufferView();
-      nonce = vector.getNonce().getBufferView();
-      this.keyStreamLength = vector.getKeyStreamLength();
-    }
 
     if (counter === undefined) {
       counter = 0;
@@ -58,14 +49,6 @@ de.bennyn.crypto.ChaCha20.Context = (function() {
     x[b] = de.bennyn.crypto.ChaCha20.Converter.rotate(x[b] ^ x[c], 7);
   };
 
-  Class.prototype.getKeyStream = function() {
-    return this.keyStream;
-  };
-
-  Class.prototype.getKeyStreamAsHex = function() {
-    return de.bennyn.crypto.ChaCha20.Converter.byteArrayToHex(this.keyStream);
-  };
-
   /**
    *
    * @param destination - Where the output should be stored
@@ -73,17 +56,15 @@ de.bennyn.crypto.ChaCha20.Context = (function() {
    * @param input - new Uint32Array(16)
    * @param length - Length of the "source"
    */
-  Class.prototype.encrypt = function(destination, source, input, length) {
-    var buf = new Array(64);
-    var dpos = 0;
+  Class.prototype.encrypt = function(dst, src, len) {
+    var x = new Uint32Array(16);
+    var output = new Uint8Array(64);
     var i = 0;
+    var dpos = 0;
     var spos = 0;
-    var x = new Array(16);
 
-    while (length > 0) {
-      for (i = 16; i--;) {
-        x[i] = input[i];
-      }
+    while (len > 0) {
+      for (i = 16; i--;) x[i] = this.input[i];
 
       for (i = 20; i > 0; i -= 2) {
         this.quarterRound(x, 0, 4, 8, 12);
@@ -97,47 +78,42 @@ de.bennyn.crypto.ChaCha20.Context = (function() {
       }
 
       for (i = 16; i--;) {
-        x[i] += input[i];
+        x[i] += this.input[i];
       }
 
       for (i = 16; i--;) {
-        de.bennyn.crypto.ChaCha20.Converter.u32to8_le(buf, 4 * i, x[i]);
+        de.bennyn.crypto.ChaCha20.Converter.u32to8_le(output, 4 * i, x[i]);
       }
 
-      input[12] += 1;
-      if (!input[12]) {
-        input[13] += 1;
+      this.input[12] += 1;
+
+      if (!this.input[12]) {
+        this.input[13] += 1;
       }
 
-      if (length <= 64) {
-        for (i = length; i--;) {
-          destination[i + dpos] = source[i + spos] ^ buf[i];
+      if (len <= 64) {
+        for (i = len; i--;) {
+          dst[i + dpos] = src[i + spos] ^ output[i];
         }
         return;
       }
 
       for (i = 64; i--;) {
-        destination[i + dpos] = source[i + spos] ^ buf[i];
+        dst[i + dpos] = src[i + spos] ^ output[i];
       }
 
-      length -= 64;
+      len -= 64;
       spos += 64;
       dpos += 64;
     }
   };
 
-  Class.prototype.generateKeyStream = function(keyStreamLength, source) {
-    if (keyStreamLength === undefined) {
-      keyStreamLength = this.keyStreamLength;
+  Class.prototype.generateKeyStream = function(dst, len) {
+    for (var i = 0; i < len; ++i) {
+      dst[i] = 0;
     }
 
-    if (source === undefined) {
-      source = new Uint8Array(keyStreamLength >> 1);
-    }
-
-    this.keyStream = new Uint8Array(keyStreamLength >> 1);
-
-    this.encrypt(this.keyStream, source, this.input, keyStreamLength);
+    this.encrypt(dst, dst, len);
   };
 
   return Class;

@@ -4,11 +4,11 @@ de.bennyn.crypto.ChaCha20.Vector = (function() {
     if (args.length === 1) {
       var vector = key;
       this.key = new de.bennyn.crypto.ChaCha20.ByteRepresentation(vector.key);
-      this.keyStream = vector.prefix;
+      this.keyStream = new de.bennyn.crypto.ChaCha20.ByteRepresentation(vector.prefix);
       this.nonce = new de.bennyn.crypto.ChaCha20.ByteRepresentation(vector.nonce);
     } else if (args.length === 3) {
       this.key = new de.bennyn.crypto.ChaCha20.ByteRepresentation(key);
-      this.keyStream = keyStream;
+      this.keyStream = new de.bennyn.crypto.ChaCha20.ByteRepresentation(keyStream);
       this.nonce = new de.bennyn.crypto.ChaCha20.ByteRepresentation(nonce);
     } else {
       throw new de.bennyn.crypto.ChaCha20.InsufficientArgumentsError();

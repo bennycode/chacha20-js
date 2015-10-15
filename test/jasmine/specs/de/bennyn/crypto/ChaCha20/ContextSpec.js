@@ -27,52 +27,41 @@ describe('ChaCha20Poly1305 Test Vectors', function() {
       }
     };
 
-    var firstVector = new de.bennyn.crypto.ChaCha20.Vector(vectors.A);
-    var secondVector = new de.bennyn.crypto.ChaCha20.Vector(vectors.B);
-    var thirdVector = new de.bennyn.crypto.ChaCha20.Vector(vectors.C);
-    var fourthVector = new de.bennyn.crypto.ChaCha20.Vector(vectors.D);
-
-    var context = new de.bennyn.crypto.ChaCha20.Context(firstVector);
-    context.generateKeyStream();
-    expect(context.getKeyStreamAsHex()).toContain(vectors.A.prefix);
-
-    context = new de.bennyn.crypto.ChaCha20.Context(secondVector);
-    context.generateKeyStream();
-    expect(context.getKeyStreamAsHex()).toContain(vectors.B.prefix);
-
-    context = new de.bennyn.crypto.ChaCha20.Context(thirdVector);
-    context.generateKeyStream();
-    expect(context.getKeyStreamAsHex()).toContain(vectors.C.prefix);
-
-    context = new de.bennyn.crypto.ChaCha20.Context(fourthVector);
-    context.generateKeyStream();
-    expect(context.getKeyStreamAsHex()).toContain(vectors.D.prefix);
+    for (var key in vectors) {
+      // Setup Vector
+      var vector = vectors[key];
+      var vectorObject = new de.bennyn.crypto.ChaCha20.Vector(vector);
+      // Setup context
+      var key = vectorObject.getKey().getBufferView();
+      var nonce = vectorObject.getNonce().getBufferView();
+      var context = new de.bennyn.crypto.ChaCha20.Context(key, nonce);
+      // Generate key-stream
+      var length = vectorObject.getKeyStream().getBufferView().length;
+      var destination = new Uint8Array(length);
+      context.generateKeyStream(destination, length);
+      var keyStream = de.bennyn.crypto.ChaCha20.Converter.byteArrayToHex(destination);
+      // Validation
+      expect(keyStream).toContain(vector.prefix);
+    }
   });
 });
 
 describe('Encryption', function() {
-  xit('can encrypt a text message', function() {
+  it('can encrypt a text message with key and nonce being array buffers', function() {
+    // Context
     var key = new ArrayBuffer(32);
-    var keyBufferView = new Uint8Array(key);
-    for (var i = 0; i < keyBufferView.length; i++) {
-      keyBufferView[i] = 0;
-    }
-
     var nonce = new ArrayBuffer(8);
-    var nonceBufferView = new Uint8Array(nonce);
-    for (var i = 0; i < nonceBufferView.length; i++) {
-      nonceBufferView[i] = 0;
-    }
+    var counter = 0;
+    var context = new de.bennyn.crypto.ChaCha20.Context(key, nonce, counter);
 
-    var source = de.bennyn.crypto.ChaCha20.Converter.stringToUint8Array("testing");
-    var input = new Uint32Array(16);
-    var length = source.length;
-    var destination = new Uint8Array(8);
-
-    var context = new de.bennyn.crypto.ChaCha20.Context(key, nonce);
-    context.encrypt(destination, source, input, length);
-
+    // Encryption
+    var message = de.bennyn.crypto.ChaCha20.Converter.stringToUint8Array('testing');
+    var destination = new Uint8Array(message.length);
+    context.encrypt(destination, message, message.length);
     var cipherText = de.bennyn.crypto.ChaCha20.Converter.byteArrayToHex(destination);
-    expect(cipherText).toContain("02dd93d9c99f5a");
+
+    // Validation
+    var expected = '02dd93d9c99f5a';
+    expect(cipherText).toBe(expected);
   });
 });

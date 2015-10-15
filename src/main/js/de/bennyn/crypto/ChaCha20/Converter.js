@@ -28,23 +28,15 @@ de.bennyn.crypto.ChaCha20.Converter = {
   },
   // from_hex
   hexStringToByteArray: function(hex) {
-    hex.replace(' ', '');
+    var bytes = [];
+    var counter = 0;
 
-    var out = [];
-    var len = hex.length;
-    var w = '';
-
-    for (var i = 0; i < len; i += 2) {
-      w = hex[i];
-      if (((i + 1) >= len) || typeof hex[i + 1] === 'undefined') {
-        w += '0';
-      } else {
-        w += hex[i + 1];
-      }
-      out.push(parseInt(w, 16));
+    while (counter < hex.length) {
+      bytes.push(parseInt(hex.substr(counter, 2), 16));
+      counter += 2;
     }
 
-    return out;
+    return bytes;
   },
   bytesEqual: function(a, b) {
     var dif = 0;
@@ -72,17 +64,6 @@ de.bennyn.crypto.ChaCha20.Converter = {
     }
 
     return hex.join('');
-  },
-  hexToByteArray: function(hex) {
-    var bytes = [];
-    var counter = 0;
-
-    while (counter < hex.length) {
-      bytes.push(parseInt(hex.substr(counter, 2), 16));
-      counter += 2;
-    }
-
-    return bytes;
   },
   stringToHex: function(input) {
     var character = '';

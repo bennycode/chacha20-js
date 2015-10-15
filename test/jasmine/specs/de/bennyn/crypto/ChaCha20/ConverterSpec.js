@@ -26,4 +26,26 @@ describe('String conversion', function() {
     var expected = new Uint16Array([8364]);
     expect(actual).toEqual(expected);
   });
+
+  it('can convert hex strings filled with zeros into a byte array', function() {
+    var input = '0000000000000000';
+    var actual = de.bennyn.crypto.ChaCha20.Converter.hexStringToByteArray(input);
+    var expected = [0, 0, 0, 0, 0, 0, 0, 0];
+    expect(actual).toEqual(expected);
+    expect(actual.length).toEqual(input.length / 2);
+  });
+
+  it('can convert hex strings with lower-case and upper-case into a byte array', function() {
+    var input = '0F0A2d';
+    var actual = de.bennyn.crypto.ChaCha20.Converter.hexStringToByteArray(input);
+    var expected = [15, 10, 45];
+    expect(actual).toEqual(expected);
+  });
+
+  xit('can convert hex strings with spaces into a byte array', function() {
+    var input = '0A 2D 3F 00';
+    var actual = de.bennyn.crypto.ChaCha20.Converter.hexStringToByteArray(input);
+    var expected = [10, 45, 63, 0];
+    expect(actual).toEqual(expected);
+  });
 });

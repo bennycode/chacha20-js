@@ -15,8 +15,6 @@
     <script src="../src/main/js/de/bennyn/crypto/ChaCha20/Vector.js"></script>
     <script src="../src/main/js/de/bennyn/crypto/ChaCha20/Context.js"></script>
 
-    <script src="../lib/libsodium.js/sodium.min.js"></script>
-
     <!-- Styles -->
     <link rel="stylesheet" href="styles/main.css">
   </head>
@@ -89,23 +87,30 @@
 
     <script>
       // https://tools.ietf.org/html/draft-agl-tls-chacha20poly1305-00#section-7
-      var testVector = {
-        key: '0000000000000000000000000000000000000000000000000000000000000000',
-        nonce: '0000000000000000',
-        prefix: '76b8e0ada0f13d90405d6ae55386bd28bdd219b8a08ded1aa836efcc8b770dc7da41597c5157488d7724e03fb8d84a376a43b8f41518a11cc387b669'
-      };
-      var vector = new de.bennyn.crypto.ChaCha20.Vector(testVector);
-      var context = new de.bennyn.crypto.ChaCha20.Context(vector);
-      context.generateKeyStream();
-      console.log('Result (ChaCha20): ' + context.getKeyStreamAsHex());
+      /*
+       var testVector = {
+       key: '0000000000000000000000000000000000000000000000000000000000000000',
+       nonce: '0000000000000000',
+       prefix: '76b8e0ada0f13d90405d6ae55386bd28bdd219b8a08ded1aa836efcc8b770dc7da41597c5157488d7724e03fb8d84a376a43b8f41518a11cc387b669'
+       };
+       var vector = new de.bennyn.crypto.ChaCha20.Vector(testVector);
+       var context = new de.bennyn.crypto.ChaCha20.Context(vector);
+       context.generateKeyStream();
+       console.log('Result (ChaCha20): ' + context.getKeyStreamAsHex());
+       */
 
       // libsodium.js
-      var libVector = '0000000000000000000000000000000000000000000000000000000000000000';
-      var libNonce = '0000000000000000';
-      var libLength = testVector.prefix.length;
-      var message = new Uint8Array(libLength >> 1);
-      var result = sodium.crypto_stream_chacha20_xor_ic(message, sodium.from_hex(libNonce), 0, sodium.from_hex(libVector), 'hex');
-      console.log('Result (libsodium): ' + result);
+      var plainKey = '0000000000000000000000000000000000000000000000000000000000000000';
+      var plainNonce = '0000000000000000';
+      var message = de.bennyn.crypto.ChaCha20.Converter.stringToUint8Array('testing');
+
+      var key = de.bennyn.crypto.ChaCha20.Converter.hexStringToByteArray(plainKey);
+      var nonce = de.bennyn.crypto.ChaCha20.Converter.hexStringToByteArray(plainNonce);
+      var destination = new Uint8Array(message.length);
+
+      var context = new de.bennyn.crypto.ChaCha20.Context(key, nonce, 0);
+      context.encrypt(destination, message, message.length);
+      console.log('Result (ChaCha20): ' + de.bennyn.crypto.ChaCha20.Converter.byteArrayToHex(destination));
     </script>
   </body>
 </html>

@@ -15,6 +15,8 @@
     <script src="../src/main/js/de/bennyn/crypto/ChaCha20/Vector.js"></script>
     <script src="../src/main/js/de/bennyn/crypto/ChaCha20/Context.js"></script>
 
+    <script src="../lib/libsodium.js/sodium.min.js"></script>
+
     <!-- Styles -->
     <link rel="stylesheet" href="styles/main.css">
   </head>
@@ -95,7 +97,15 @@
       var vector = new de.bennyn.crypto.ChaCha20.Vector(testVector);
       var context = new de.bennyn.crypto.ChaCha20.Context(vector);
       context.generateKeyStream();
-      console.log('Result: ' + context.getKeyStreamAsHex());
+      console.log('Result (ChaCha20): ' + context.getKeyStreamAsHex());
+
+      // libsodium.js
+      var libVector = '0000000000000000000000000000000000000000000000000000000000000000';
+      var libNonce = '0000000000000000';
+      var libLength = testVector.prefix.length;
+      var message = new Uint8Array(libLength >> 1);
+      var result = sodium.crypto_stream_chacha20_xor_ic(message, sodium.from_hex(libNonce), 0, sodium.from_hex(libVector), 'hex');
+      console.log('Result (libsodium): ' + result);
     </script>
   </body>
 </html>

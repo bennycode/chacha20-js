@@ -1,18 +1,21 @@
 module.exports = function(grunt) {
-  grunt.registerTask('test', 'Run unit tests', function(is_headless) {
-    (is_headless !== undefined) ? is_headless = is_headless : is_headless = false;
-    grunt.log.writeln('Run tests with Karma: ' + is_headless);
+  grunt.registerTask('test', 'Run unit tests', function(engine, create_coverage) {
+    (create_coverage !== undefined) ? create_coverage = create_coverage : create_coverage = false;
+    grunt.log.writeln('Run tests with engine: ' + engine);
+    grunt.log.writeln('Create code coverage: ' + create_coverage);
 
     var tasks = [
       'dist'
     ];
 
-    if (is_headless === 'true') {
-      tasks.push('karma:phantom');
-    } else {
-      tasks.push('karma:chrome');
+    var goal = 'karma:' + engine;
+
+    if (create_coverage === 'true') {
+      goal += '_coverage';
+      tasks.unshift('clean:code_coverage_reports');
     }
 
+    tasks.push(goal);
     grunt.task.run(tasks);
   });
 };

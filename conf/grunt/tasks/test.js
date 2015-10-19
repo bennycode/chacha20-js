@@ -1,16 +1,18 @@
 module.exports = function(grunt) {
-  // TODO: Pure jasmine test task can be replaced with Karma which uses PhantomJS as engine
-  grunt.registerTask('test', 'Run unit tests', function(test_with_karma) {
-    (test_with_karma !== undefined) ? is_headless = test_with_karma : is_headless = false;
-    grunt.log.writeln('Run tests with Karma: ' + test_with_karma);
+  grunt.registerTask('test', 'Run unit tests', function(is_headless) {
+    (is_headless !== undefined) ? is_headless = is_headless : is_headless = false;
+    grunt.log.writeln('Run tests with Karma: ' + is_headless);
 
-    if (test_with_karma) {
-      grunt.task.run([
-        'dist',
-        'karma:jasmine'
-      ]);
+    var tasks = [
+      'dist'
+    ];
+
+    if (is_headless === 'true') {
+      tasks.push('karma:phantom');
     } else {
-      grunt.task.run('jasmine:test');
+      tasks.push('karma:chrome');
     }
+
+    grunt.task.run(tasks);
   });
 };

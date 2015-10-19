@@ -1,7 +1,11 @@
 .idea/**/*.xml
 !.idea/codeStyleSettings.xml
+.sass-cache
 /bower_components/
 /dist/
 /lib/
 /nbproject/private/
+/test/nightwatch/report
+/test/nightwatch/screenshots
 /node_modules/
+/selenium-debug.log

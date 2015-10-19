@@ -5,7 +5,7 @@ module.exports = {
     ]
   },
   options: {
-    specs: ['<%= dir.test_specifications %>/**/*Spec.js'],
+    specs: ['<%= dir.jasmine.test_specifications %>/**/*Spec.js'],
     vendor: []
   }
 };

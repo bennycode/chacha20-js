@@ -1,4 +1,5 @@
-module.exports = function (grunt) {
+module.exports = function(grunt) {
+  // Dependencies
   require('load-grunt-tasks')(grunt, {
     pattern: [
       'grunt-*',
@@ -6,20 +7,33 @@ module.exports = function (grunt) {
     ]
   });
 
-  var config = {};
+  // Helper functions
+  function concatenateFiles(path) {
+    var glob = require('glob');
+    var object = {};
+    var key;
 
-  var globals = {
+    glob.sync('*', {cwd: path}).forEach(function(option) {
+      key = option.replace(/\.js$/, '');
+      object[key] = require(path + option);
+    });
+
+    return object;
+  }
+
+  // Configuration
+  var config = {
     dir: grunt.file.readJSON('./conf/grunt/globals/dir.json'),
-    pkg: grunt.file.readJSON('package.json')
+    pkg: grunt.file.readJSON('package.json'),
+    server: grunt.file.readJSON('./conf/grunt/globals/server.json')
   };
 
-  var options = {
-    clean: require('./conf/grunt/options/clean.js'),
-    jasmine: require('./conf/grunt/options/jasmine.js'),
-    uglify: require('./conf/grunt/options/uglify.js')
-  };
+  grunt.event.on('watch', function(action, filepath, target) {
+    grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
+  });
 
-  grunt.util._.extend(config, globals, options);
+  // Initialization
+  grunt.util._.extend(config, concatenateFiles('./conf/grunt/options/'));
   grunt.initConfig(config);
   grunt.loadTasks('./conf/grunt/tasks');
 };

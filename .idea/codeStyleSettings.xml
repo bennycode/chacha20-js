@@ -5,6 +5,9 @@
       <value>
         <option name="HTML_ATTRIBUTE_WRAP" value="0" />
         <option name="HTML_DO_NOT_INDENT_CHILDREN_OF" value="" />
+        <JSCodeStyleSettings>
+          <option name="SPACE_BEFORE_FUNCTION_LEFT_PARENTH" value="false" />
+        </JSCodeStyleSettings>
         <XML>
           <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
         </XML>

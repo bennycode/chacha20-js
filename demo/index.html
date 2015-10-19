@@ -2,26 +2,123 @@
 <html>
   <head>
     <title>chacha20-js</title>
-    <meta charset="UTF-8" />
-    <script src="../src/js/de/bennyn/crypto/ChaCha20.js"></script>
-    <script src="../src/js/de/bennyn/crypto/ChaCha20/InsufficientArgumentsError.js"></script>
-    <script src="../src/js/de/bennyn/crypto/ChaCha20/Converter.js"></script>
-    <script src="../src/js/de/bennyn/crypto/ChaCha20/ByteRepresentation.js"></script>
-    <script src="../src/js/de/bennyn/crypto/ChaCha20/Vector.js"></script>
-    <script src="../src/js/de/bennyn/crypto/ChaCha20/Context.js"></script>
+
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- Scripts -->
+    <script src="../src/main/js/de/bennyn/crypto/ChaCha20.js"></script>
+    <script src="../src/main/js/de/bennyn/crypto/ChaCha20/InsufficientArgumentsError.js"></script>
+    <script src="../src/main/js/de/bennyn/crypto/ChaCha20/Converter.js"></script>
+    <script src="../src/main/js/de/bennyn/crypto/ChaCha20/ByteRepresentation.js"></script>
+    <script src="../src/main/js/de/bennyn/crypto/ChaCha20/Vector.js"></script>
+    <script src="../src/main/js/de/bennyn/crypto/ChaCha20/Context.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
   </head>
   <body>
+    <header class="app-bar promote-layer">
+      <div class="app-bar-container">
+        <button class="menu"><img src="images/hamburger.svg" alt="Menu"></button>
+        <h1 class="logo"><strong>ChaCha20</strong>.js</h1>
+        <section class="app-bar-actions">
+          <!-- Put App Bar Buttons Here -->
+          <!-- e.g <button><i class="icon icon-star"></i></button> -->
+        </section>
+      </div>
+    </header>
+
+    <nav class="navdrawer-container promote-layer">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#playground">Playground</a></li>
+        <li><a href="styleguide.html">Style Guide</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <h1 id="playground">Playground</h1>
+
+      <p>
+        <label for="vector-key">Key</label><br/>
+        <input id="vector-key"
+               type="text"
+               name="key"
+               placeholder="0000000000000000000000000000000000000000000000000000000000000000"
+               required="required"
+               data-uie-name="enter-key"
+          />
+      </p>
+
+      <p>
+        <label for="vector-nonce">Nonce</label><br/>
+        <input id="vector-nonce"
+               type="text"
+               name="nonce"
+               placeholder="0000000000000000"
+               required="required"
+               data-uie-name="enter-nonce"
+          />
+      </p>
+
+      <p>
+        <label for="vector-prefix">Prefix</label><br/>
+        <input id="vector-prefix"
+               type="text"
+               name="prefix"
+               placeholder="76b8e0ada0f13d90405d6ae55386bd28bdd219b8a08ded1aa836efcc8b770dc7da41597c5157488d7724e03fb8d84a376a43b8f41518a11cc387b669"
+               required="required"
+               data-uie-name="enter-key-stream"
+          />
+      </p>
+
+      <p>
+        <button id="test-it"
+                class="button--primary"
+                data-uie-name="run-encryption"
+          >Encrypt
+        </button>
+      </p>
+
+      <p>
+        <label for="vector-output">Output</label><br/>
+        <input id="vector-output"
+               type="text"
+               name="output"
+               readonly="readonly"
+               data-uie-name="display-cipher-text"
+          />
+      </p>
+    </main>
+
     <script>
       // https://tools.ietf.org/html/draft-agl-tls-chacha20poly1305-00#section-7
-      var testVector = {
-        key: '0000000000000000000000000000000000000000000000000000000000000000',
-        nonce: '0000000000000000',
-        prefix: '76b8e0ada0f13d90405d6ae55386bd28bdd219b8a08ded1aa836efcc8b770dc7da41597c5157488d7724e03fb8d84a376a43b8f41518a11cc387b669'
-      };
-      var vector = new de.bennyn.crypto.ChaCha20.Vector(testVector);
-      var context = new de.bennyn.crypto.ChaCha20.Context(vector);
-      context.generateKeyStream();
-      console.log('Result: ' + context.getKeyStreamAsHex());
+      /*
+       var testVector = {
+       key: '0000000000000000000000000000000000000000000000000000000000000000',
+       nonce: '0000000000000000',
+       prefix: '76b8e0ada0f13d90405d6ae55386bd28bdd219b8a08ded1aa836efcc8b770dc7da41597c5157488d7724e03fb8d84a376a43b8f41518a11cc387b669'
+       };
+       var vector = new de.bennyn.crypto.ChaCha20.Vector(testVector);
+       var context = new de.bennyn.crypto.ChaCha20.Context(vector);
+       context.generateKeyStream();
+       console.log('Result (ChaCha20): ' + context.getKeyStreamAsHex());
+       */
+
+      // libsodium.js
+      var plainKey = '0000000000000000000000000000000000000000000000000000000000000000';
+      var plainNonce = '0000000000000000';
+      var message = de.bennyn.crypto.ChaCha20.Converter.stringToUint8Array('testing');
+
+      var key = de.bennyn.crypto.ChaCha20.Converter.hexStringToByteArray(plainKey);
+      var nonce = de.bennyn.crypto.ChaCha20.Converter.hexStringToByteArray(plainNonce);
+      var destination = new Uint8Array(message.length);
+
+      var context = new de.bennyn.crypto.ChaCha20.Context(key, nonce, 0);
+      context.encrypt(destination, message, message.length);
+      console.log('Result (ChaCha20): ' + de.bennyn.crypto.ChaCha20.Converter.byteArrayToHex(destination));
     </script>
   </body>
 </html>

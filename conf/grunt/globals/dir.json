@@ -1,5 +1,5 @@
 {
-  "code_coverage": "build/coverage",
+  "code_coverage_reports": "report/coverage",
   "demo_code_root": "demo",
   "demo_code": {
     "style": {

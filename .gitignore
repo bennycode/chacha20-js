@@ -2,10 +2,13 @@
 !.idea/codeStyleSettings.xml
 .sass-cache
 /bower_components/
+/demo/styles/
 /dist/
+/docs/
 /lib/
 /nbproject/private/
 /test/nightwatch/report
 /test/nightwatch/screenshots
 /node_modules/
+/report/
 /selenium-debug.log

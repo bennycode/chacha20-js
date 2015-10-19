@@ -1,3 +1,4 @@
+// TODO: Create global variable for "launch_url" which can be used by other tasks
 module.exports = {
   options: {
     standalone: true,
@@ -7,7 +8,7 @@ module.exports = {
     output_folder: '<%= dir.nightwatch.report %>',
     "test_settings": {
       "default": {
-        "launch_url": "https://app.wire.com/auth/#login",
+        "launch_url": 'http://localhost:<%= server.port.http %>/<%= dir.demo_code_root %>',
         "selenium_host": "localhost",
         "selenium_port": '<%= server.port.selenium %>',
         "silent": true,

@@ -48,6 +48,7 @@
                name="key"
                placeholder="0000000000000000000000000000000000000000000000000000000000000000"
                required="required"
+               data-uie-name="enter-key"
           />
       </p>
 
@@ -58,6 +59,7 @@
                name="nonce"
                placeholder="0000000000000000"
                required="required"
+               data-uie-name="enter-nonce"
           />
       </p>
 
@@ -68,11 +70,16 @@
                name="prefix"
                placeholder="76b8e0ada0f13d90405d6ae55386bd28bdd219b8a08ded1aa836efcc8b770dc7da41597c5157488d7724e03fb8d84a376a43b8f41518a11cc387b669"
                required="required"
+               data-uie-name="enter-key-stream"
           />
       </p>
 
       <p>
-        <button id="test-it" class="button--primary">Encrypt</button>
+        <button id="test-it"
+                class="button--primary"
+                data-uie-name="run-encryption"
+          >Encrypt
+        </button>
       </p>
 
       <p>
@@ -81,6 +88,7 @@
                type="text"
                name="output"
                readonly="readonly"
+               data-uie-name="display-cipher-text"
           />
       </p>
     </main>

@@ -4,7 +4,7 @@ module.exports = {
   },
   nightwatch: {
     tasks: [
-      "connect:serve:keepalive",
+      "connect:nightwatch:keepalive",
       "nightwatch:default"
     ]
   }

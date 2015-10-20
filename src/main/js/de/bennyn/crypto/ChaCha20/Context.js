@@ -1,5 +1,10 @@
 de.bennyn.crypto.ChaCha20.Context = (function() {
-  function Class(key, nonce, counter) {
+  /**
+   * Represents the context for an encryption using ChaCha20.
+   * @constructor
+   * @memberOf de.bennyn.crypto.ChaCha20
+   */
+  function Context(key, nonce, counter) {
     this.input = new Uint32Array(16);
 
     if (counter === undefined) {
@@ -35,7 +40,7 @@ de.bennyn.crypto.ChaCha20.Context = (function() {
   }
 
   // chacha20_round
-  Class.prototype.quarterRound = function(x, a, b, c, d) {
+  Context.prototype.quarterRound = function(x, a, b, c, d) {
     x[a] += x[b];
     x[d] = de.bennyn.crypto.ChaCha20.Converter.rotate(x[d] ^ x[a], 16);
 
@@ -50,20 +55,18 @@ de.bennyn.crypto.ChaCha20.Context = (function() {
   };
 
   /**
-   *
-   * @param destination - Where the output should be stored
-   * @param source - Text to be encrypted (as "Uint8Array")
-   * @param input - new Uint32Array(16)
-   * @param length - Length of the "source"
+   * @param {Uint8Array} destination - Reference to the storage for the ciphertext
+   * @param {Uint8Array} source - Text to be encrypted
+   * @param {number} length - Length of the unencrypted text (source)
    */
-  Class.prototype.encrypt = function(dst, src, len) {
+  Context.prototype.encrypt = function(destination, source, length) {
     var x = new Uint32Array(16);
     var output = new Uint8Array(64);
     var i = 0;
     var dpos = 0;
     var spos = 0;
 
-    while (len > 0) {
+    while (length > 0) {
       for (i = 16; i--;) x[i] = this.input[i];
 
       for (i = 20; i > 0; i -= 2) {
@@ -91,31 +94,31 @@ de.bennyn.crypto.ChaCha20.Context = (function() {
         this.input[13] += 1;
       }
 
-      if (len <= 64) {
-        for (i = len; i--;) {
-          dst[i + dpos] = src[i + spos] ^ output[i];
+      if (length <= 64) {
+        for (i = length; i--;) {
+          destination[i + dpos] = source[i + spos] ^ output[i];
         }
         return;
       }
 
       for (i = 64; i--;) {
-        dst[i + dpos] = src[i + spos] ^ output[i];
+        destination[i + dpos] = source[i + spos] ^ output[i];
       }
 
-      len -= 64;
+      length -= 64;
       spos += 64;
       dpos += 64;
     }
   };
 
-  Class.prototype.generateKeyStream = function(dst, len) {
-    for (var i = 0; i < len; ++i) {
-      dst[i] = 0;
+  Context.prototype.generateKeyStream = function(destination, length) {
+    for (var i = 0; i < length; ++i) {
+      destination[i] = 0;
     }
 
-    this.encrypt(dst, dst, len);
+    this.encrypt(destination, destination, length);
   };
 
-  return Class;
+  return Context;
 })();
 

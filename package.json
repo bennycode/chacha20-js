@@ -13,6 +13,7 @@
     "grunt-contrib-uglify": "~0.9",
     "grunt-contrib-watch": "~0.6",
     "grunt-eslint": "~17.2",
+    "grunt-jsdoc": "~1.0",
     "grunt-karma": "~0.12",
     "grunt-nightwatch": "~0.4",
     "karma": "^0.13.0",

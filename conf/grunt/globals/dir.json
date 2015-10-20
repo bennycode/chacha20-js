@@ -8,6 +8,7 @@
     }
   },
   "distributables": "dist",
+  "documentation": "docs",
   "external_libraries": "lib",
   "jasmine": {
     "test_specifications": "test/jasmine/specs"

@@ -1,4 +1,5 @@
 module.exports = {
-  dist: '<%= dir.distributables %>',
-  code_coverage_reports: '<%= dir.code_coverage_reports %>'
+  distributables: '<%= dir.distributables %>',
+  code_coverage_reports: '<%= dir.code_coverage_reports %>',
+  documentation: '<%= dir.documentation %>'
 };

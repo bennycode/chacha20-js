@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     grunt.task.run([
       'init',
       'eslint:src',
-      'clean:dist',
+      'clean:distributables',
       'uglify:dist'
     ]);
   });

@@ -1,8 +1,4 @@
 module.exports = function(grunt) {
-  grunt.config('task', 'build');
-  grunt.config('option', 'main');
-  grunt.config('language', 'coffee');
-
   // CoffeeScript
   grunt.registerTask('build_demo_coffee', function() {
     grunt.task.run([
@@ -25,6 +21,15 @@ module.exports = function(grunt) {
     ]);
   });
 
+  // JavaScript
+  var noOperation = function() {
+    grunt.log.writeln('No operation');
+  };
+
+  grunt.registerTask('build_demo_js', noOperation);
+  grunt.registerTask('build_main_js', noOperation);
+  grunt.registerTask('build_test_js', noOperation);
+
   // TypeScript
   grunt.registerTask('build_main_ts', function() {
     grunt.task.run([
@@ -34,10 +39,16 @@ module.exports = function(grunt) {
   });
 
   // Default
-  grunt.registerTask('build', function() {
+  grunt.registerTask('build', function(option) {
+    grunt.log.writeln('=== BUILD ===');
+
+    if (option === undefined) {
+      option = 'main';
+    }
+
     var parts = [
-      grunt.config('task'),
-      grunt.config('option'),
+      'build',
+      option,
       grunt.config('language')
     ];
 

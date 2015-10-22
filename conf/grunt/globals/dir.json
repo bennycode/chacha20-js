@@ -5,6 +5,7 @@
   "build_main_coffee": "build/main/coffee",
   "build_main_ts": "build/main/ts",
   "build_test_coffee": "build/test/coffee",
+  "conf_linter": "conf/linter",
   "code_coverage_reports": "report/coverage",
   "demo_code_root": "demo",
   "demo_code": {
@@ -31,7 +32,12 @@
     "ts:": "src/main/ts"
   },
   "source_demo_coffee": "src/demo/coffee",
+  "source_demo_js": "src/demo/js",
+  "source_demo_ts": "src/demo/ts",
   "source_main_coffee": "src/main/coffee",
+  "source_main_js": "src/main/js",
   "source_main_ts": "src/main/ts",
-  "source_test_coffee": "src/test/coffee"
+  "source_test_coffee": "src/test/coffee",
+  "source_test_js": "src/test/js",
+  "source_test_ts": "src/test/ts"
 }

@@ -27,6 +27,10 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     server: grunt.file.readJSON('./conf/grunt/globals/server.json')
   };
+  grunt.util._.extend(config, concatenateFiles('./conf/grunt/options/'));
+  grunt.initConfig(config);
+
+  grunt.config('language', 'js');
 
   // Events
   grunt.event.on('watch', function(action, filepath, target) {
@@ -34,7 +38,5 @@ module.exports = function(grunt) {
   });
 
   // Initialization
-  grunt.util._.extend(config, concatenateFiles('./conf/grunt/options/'));
-  grunt.initConfig(config);
   grunt.loadTasks('./conf/grunt/tasks');
 };

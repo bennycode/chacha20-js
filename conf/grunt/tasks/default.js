@@ -12,13 +12,13 @@ module.exports = function(grunt) {
     grunt.task.run([
       'init',
       // Check
+      'check:demo',
       'check:main',
       'check:test',
-      'check:demo',
       // Build
+      'build:demo',
       'build:main',
-      'build:test',
-      'build:demo'
+      'build:test'
     ]);
   });
 };

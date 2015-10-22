@@ -27,15 +27,15 @@ module.exports = function(grunt) {
 
   // TypeScript
   grunt.registerTask('check_demo_ts', function() {
-    grunt.task.run([]);
+    grunt.task.run(['tslint:check_demo_ts']);
   });
 
   grunt.registerTask('check_main_ts', function() {
-    grunt.task.run([]);
+    grunt.task.run(['tslint:check_main_ts']);
   });
 
   grunt.registerTask('check_test_ts', function() {
-    grunt.task.run([]);
+    grunt.task.run(['tslint:check_test_ts']);
   });
 
   // Default

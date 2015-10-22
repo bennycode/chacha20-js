@@ -20,13 +20,15 @@
     "grunt-karma": "~0.12",
     "grunt-nightwatch": "~0.4",
     "grunt-ts": "~5.1",
+    "grunt-tslint": "~2.5",
     "karma": "^0.13.0",
     "karma-chrome-launcher": "~0.1",
     "karma-coverage": "~0.5",
     "karma-jasmine": "~0.1",
     "karma-phantomjs-launcher": "~0.2",
     "load-grunt-tasks": "~3.2",
-    "phantomjs": "~1.9"
+    "phantomjs": "~1.9",
+    "tslint": "~2.5"
   },
   "license": "LicenseRef-LICENSE",
   "repository": {

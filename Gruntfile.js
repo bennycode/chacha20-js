@@ -28,6 +28,7 @@ module.exports = function(grunt) {
     server: grunt.file.readJSON('./conf/grunt/globals/server.json')
   };
 
+  // Events
   grunt.event.on('watch', function(action, filepath, target) {
     grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
   });

@@ -31,10 +31,24 @@ module.exports = function(grunt) {
   grunt.registerTask('build_test_js', noOperation);
 
   // TypeScript
+  grunt.registerTask('build_demo_ts', function() {
+    grunt.task.run([
+      'clean:build_demo_ts',
+      'ts:build_demo_ts'
+    ]);
+  });
+
   grunt.registerTask('build_main_ts', function() {
     grunt.task.run([
       'clean:build_main_ts',
       'ts:build_main_ts'
+    ]);
+  });
+
+  grunt.registerTask('build_test_ts', function() {
+    grunt.task.run([
+      'clean:build_test_ts',
+      'ts:build_test_ts'
     ]);
   });
 

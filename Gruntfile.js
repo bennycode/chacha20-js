@@ -30,7 +30,8 @@ module.exports = function(grunt) {
   grunt.util._.extend(config, concatenateFiles('./conf/grunt/options/'));
   grunt.initConfig(config);
 
-  grunt.config('language', 'js');
+  grunt.config('script', 'js');
+  grunt.config('style', 'sass');
 
   // Events
   grunt.event.on('watch', function(action, filepath, target) {

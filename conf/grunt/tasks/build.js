@@ -49,7 +49,7 @@ module.exports = function(grunt) {
     var parts = [
       'build',
       option,
-      grunt.config('language')
+      grunt.config('script')
     ];
 
     grunt.task.run(parts.join('_'));

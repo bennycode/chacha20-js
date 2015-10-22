@@ -25,7 +25,8 @@
     "karma-coverage": "~0.5",
     "karma-jasmine": "~0.1",
     "karma-phantomjs-launcher": "~0.2",
-    "load-grunt-tasks": "~3.2"
+    "load-grunt-tasks": "~3.2",
+    "phantomjs": "~1.9"
   },
   "license": "LicenseRef-LICENSE",
   "repository": {

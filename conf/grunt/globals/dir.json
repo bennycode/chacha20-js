@@ -20,13 +20,13 @@
   },
   "distributables": "dist",
   "documentation": "docs",
-  "external_libraries": "lib",
   "nightwatch": {
     "config": "conf/nightwatch",
     "report": "test/nightwatch/report",
     "screenshots": "test/nightwatch/screenshots",
     "tests": "test/nightwatch/tests"
   },
+  "lib": "lib",
   "source_demo_coffee": "src/demo/coffee",
   "source_demo_js": "src/demo/js",
   "source_demo_ts": "src/demo/ts",

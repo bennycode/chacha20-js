@@ -12,13 +12,29 @@ module.exports = function(grunt) {
   // CoffeeScript
   grunt.registerTask('test_headless_coffee', headLessTest);
 
+  grunt.registerTask('test_spec_coffee', function(testName) {
+    if (testName) {
+      grunt.task.run([
+        'newer:coffee:build_main_coffee',
+        'newer:coffee:build_test_coffee'
+      ]);
+
+      var nextTask = 'test_headless_coffee';
+      var value = '<%= dir.build_test_coffee_jasmine_specs %>/' + testName + 'Spec.js';
+
+      grunt.config('jasmine.' + nextTask + '.options.specs', value);
+      grunt.task.run('jasmine:' + nextTask);
+    }
+  });
+
   // JavaScript
   grunt.registerTask('test_headless_js', headLessTest);
 
   grunt.registerTask('test_spec_js', function(testName) {
     if (testName) {
-      var value = '<%= dir.source_test_js_jasmine_specs %>/' + testName + 'Spec.js';
       var nextTask = 'test_headless_js';
+      var value = '<%= dir.source_test_js_jasmine_specs %>/' + testName + 'Spec.js';
+
       grunt.config('jasmine.' + nextTask + '.options.specs', value);
       grunt.task.run(nextTask);
     }

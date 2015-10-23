@@ -6,6 +6,7 @@
   "build_main_coffee": "build/main/coffee",
   "build_main_ts": "build/main/ts",
   "build_test_coffee": "build/test/coffee",
+  "build_test_coffee_jasmine_specs": "build/test/coffee/jasmine/specs",
   "build_test_ts": "build/test/ts",
   "conf_linter": "conf/linter",
   "code_coverage_reports": "report/coverage",

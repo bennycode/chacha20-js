@@ -43,6 +43,21 @@ module.exports = function(grunt) {
   // TypeScript
   grunt.registerTask('test_headless_ts', headLessTest);
 
+  grunt.registerTask('test_spec_ts', function(testName) {
+    if (testName) {
+      grunt.task.run([
+        'newer:ts:build_main_ts',
+        'newer:ts:build_test_ts'
+      ]);
+
+      var nextTask = 'test_headless_ts';
+      var value = '<%= dir.build_test_ts_jasmine_specs %>/' + testName + 'Spec.js';
+
+      grunt.config('jasmine.' + nextTask + '.options.specs', value);
+      grunt.task.run('jasmine:' + nextTask);
+    }
+  });
+
   // Default
   grunt.registerTask('test', function(option, scriptLanguage) {
     grunt.log.writeln('=== ' + grunt.task.current.name.toUpperCase() + ' ===');

@@ -30,7 +30,7 @@ module.exports = function(grunt) {
   grunt.util._.extend(config, concatenateFiles('./conf/grunt/options/'));
   grunt.initConfig(config);
 
-  grunt.config('script', 'coffee');
+  grunt.config('script', 'ts');
   grunt.config('style', 'sass');
 
   // Events

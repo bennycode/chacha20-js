@@ -8,6 +8,7 @@
   "build_test_coffee": "build/test/coffee",
   "build_test_coffee_jasmine_specs": "build/test/coffee/jasmine/specs",
   "build_test_ts": "build/test/ts",
+  "build_test_ts_jasmine_specs": "build/test/ts/jasmine/specs",
   "conf_linter": "conf/linter",
   "code_coverage_reports": "report/coverage",
   "demo_code_root": "demo",

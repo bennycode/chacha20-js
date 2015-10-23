@@ -4,6 +4,7 @@
 .grunt
 .sass-cache
 .tscache
+_SpecRunner.html
 /bower_components/
 /build/
 /demo/styles/
@@ -14,5 +15,9 @@
 /node_modules/
 /report/
 /selenium-debug.log
+/src/main/ts/**/*.js
+/src/main/ts/**/*.js.map
+/src/test/ts/**/*.js
+/src/test/ts/**/*.js.map
 /test/nightwatch/report
 /test/nightwatch/screenshots

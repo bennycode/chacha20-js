@@ -1,6 +1,7 @@
 **/*.baseDir.ts
 .idea/**/*.xml
 !.idea/codeStyleSettings.xml
+.grunt
 .sass-cache
 .tscache
 /bower_components/

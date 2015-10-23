@@ -15,6 +15,15 @@ module.exports = function(grunt) {
   // JavaScript
   grunt.registerTask('test_headless_js', headLessTest);
 
+  grunt.registerTask('test_spec_js', function(testName) {
+    if (testName) {
+      var value = '<%= dir.source_test_js_jasmine_specs %>/' + testName + 'Spec.js';
+      var nextTask = 'test_headless_js';
+      grunt.config('jasmine.' + nextTask + '.options.specs', value);
+      grunt.task.run(nextTask);
+    }
+  });
+
   // TypeScript
   grunt.registerTask('test_headless_ts', headLessTest);
 

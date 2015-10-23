@@ -1,5 +1,5 @@
 module.exports = {
-  install: {
+  init: {
     options: {
       cleanTargetDir: true,
       cleanBowerDir: true,

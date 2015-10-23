@@ -39,17 +39,17 @@ module.exports = function(grunt) {
   });
 
   // Default
-  grunt.registerTask('check', function(option) {
-    grunt.log.writeln('=== CHECK ===');
+  grunt.registerTask('check', function(option, scriptLanguage) {
+    grunt.log.writeln('=== ' + grunt.task.current.name.toUpperCase() + ' ===');
 
     if (option === undefined) {
       option = 'main';
     }
 
     var parts = [
-      'check',
+      grunt.task.current.name,
       option,
-      grunt.config('script')
+      scriptLanguage || grunt.config('script')
     ];
 
     grunt.task.run(parts.join('_'));

@@ -1,9 +1,9 @@
 module.exports = function(grunt) {
   grunt.registerTask('init', function() {
-    grunt.log.writeln('=== INIT ===');
+    grunt.log.writeln('=== ' + grunt.task.current.name.toUpperCase() + ' ===');
 
     grunt.task.run([
-      'bower:install'
+      'bower:init'
     ]);
   });
 };

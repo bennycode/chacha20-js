@@ -18,7 +18,9 @@ module.exports = function(grunt) {
       // Build
       'build:demo',
       'build:main',
-      'build:test'
+      'build:test',
+      // Test
+      'test:headless'
     ]);
   });
 };

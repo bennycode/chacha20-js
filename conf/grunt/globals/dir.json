@@ -19,19 +19,11 @@
   "distributables": "dist",
   "documentation": "docs",
   "external_libraries": "lib",
-  "jasmine": {
-    "test_specifications": "test/jasmine/specs"
-  },
   "nightwatch": {
     "config": "conf/nightwatch",
     "report": "test/nightwatch/report",
     "screenshots": "test/nightwatch/screenshots",
     "tests": "test/nightwatch/tests"
-  },
-  "source_code": {
-    "js": "src/main/js",
-    "css": "src/main/css",
-    "ts:": "src/main/ts"
   },
   "source_demo_coffee": "src/demo/coffee",
   "source_demo_js": "src/demo/js",

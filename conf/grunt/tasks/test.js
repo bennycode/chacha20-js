@@ -1,23 +1,37 @@
 module.exports = function(grunt) {
-  grunt.registerTask('test', 'Run unit tests', function(engine, create_coverage) {
-    (engine !== undefined) ? engine = engine : engine = 'phantom';
-    (create_coverage !== undefined) ? create_coverage = create_coverage : create_coverage = false;
+  // Helpers
+  var headLessTest = function() {
+    var scriptLanguage = grunt.task.current.name.split('_')[2];
+    grunt.task.run([
+      'build:main:' + scriptLanguage,
+      'build:test:' + scriptLanguage,
+      'jasmine:test_headless_' + scriptLanguage
+    ]);
+  };
 
-    grunt.log.writeln('Run tests with engine: ' + engine);
-    grunt.log.writeln('Create code coverage: ' + create_coverage);
+  // CoffeeScript
+  grunt.registerTask('test_headless_coffee', headLessTest);
 
-    var tasks = [
-      'dist'
-    ];
+  // JavaScript
+  grunt.registerTask('test_headless_js', headLessTest);
 
-    var goal = 'karma:' + engine;
+  // TypeScript
+  grunt.registerTask('test_headless_ts', headLessTest);
 
-    if (create_coverage === 'true') {
-      goal += '_coverage';
-      tasks.unshift('clean:code_coverage_reports');
+  // Default
+  grunt.registerTask('test', function(option, scriptLanguage) {
+    grunt.log.writeln('=== ' + grunt.task.current.name.toUpperCase() + ' ===');
+
+    if (option === undefined) {
+      option = 'headless';
     }
 
-    tasks.push(goal);
-    grunt.task.run(tasks);
+    var parts = [
+      grunt.task.current.name,
+      option,
+      scriptLanguage || grunt.config('script')
+    ];
+
+    grunt.task.run(parts.join('_'));
   });
 };

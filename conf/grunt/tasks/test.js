@@ -3,13 +3,30 @@ module.exports = function(grunt) {
   var headLessTest = function() {
     var scriptLanguage = grunt.task.current.name.split('_')[2];
     grunt.task.run([
-      'build:main:' + scriptLanguage,
-      'build:test:' + scriptLanguage,
+      'build_main_' + scriptLanguage,
+      'build_test_' + scriptLanguage,
       'jasmine:test_headless_' + scriptLanguage
     ]);
   };
 
+  var browserTest = function(browserName) {
+    if (browserName) {
+      var scriptLanguage = grunt.task.current.name.split('_')[2];
+      var testName = 'test_browser';
+      grunt.config('karma.' + testName + '.browsers', [browserName]);
+
+      grunt.task.run([
+        'build_main_' + scriptLanguage,
+        'build_test_' + scriptLanguage,
+        'karma:' + testName
+      ]);
+    } else {
+      grunt.log.writeln('Please specify a browser like "Chrome" or "Firefox"');
+    }
+  };
+
   // CoffeeScript
+  grunt.registerTask('test_browser_coffee', browserTest);
   grunt.registerTask('test_headless_coffee', headLessTest);
 
   grunt.registerTask('test_spec_coffee', function(testName) {
@@ -28,6 +45,7 @@ module.exports = function(grunt) {
   });
 
   // JavaScript
+  grunt.registerTask('test_browser_js', browserTest);
   grunt.registerTask('test_headless_js', headLessTest);
 
   grunt.registerTask('test_spec_js', function(testName) {
@@ -40,16 +58,9 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('test_browser_js', function(browserName) {
-    var scriptLanguage = grunt.task.current.name.split('_')[2];
-    grunt.task.run([
-      'build:main:' + scriptLanguage,
-      'build:test:' + scriptLanguage,
-      'karma:test_' + browserName.toLowerCase() + '_' + scriptLanguage
-    ]);
-  });
 
   // TypeScript
+  grunt.registerTask('test_browser_ts', browserTest);
   grunt.registerTask('test_headless_ts', headLessTest);
 
   grunt.registerTask('test_spec_ts', function(testName) {

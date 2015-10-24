@@ -41,6 +41,7 @@ References:
     - `grunt test_browser_coffee:Chrome`
     - `grunt test_browser_js:PhantomJS`
     - `grunt test_browser_ts:IE`
+ - test_end2end (*Run End-to-End tests on a development server*)
  - test_headless (*Run all unit tests with PhantomJS*)
     - `grunt test_headless_coffee`
     - `grunt test_headless_js`
@@ -49,4 +50,8 @@ References:
     - `grunt test_spec_coffee:Proteus/util/KeyDerivationUtilSpec` 
     - `grunt test_spec_js:de/bennyn/crypto/ChaCha20/ContextSpec` 
     - `grunt test_spec_ts:Validation/HelloWorldSpec`
+- **coverage**
+- **develop**
+- **docs**
+- **deploy**
 

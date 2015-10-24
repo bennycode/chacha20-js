@@ -26,6 +26,7 @@
     "karma-chrome-launcher": "~0.1",
     "karma-coverage": "~0.5",
     "karma-firefox-launcher": "~0.1",
+    "karma-ie-launcher": "~0.2",
     "karma-jasmine": "~0.1",
     "karma-phantomjs-launcher": "~0.2",
     "load-grunt-tasks": "~3.2",

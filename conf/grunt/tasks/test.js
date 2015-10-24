@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
   // Helpers
-  var headLessTest = function() {
+  var testHeadLess = function() {
     var scriptLanguage = grunt.task.current.name.split('_')[2];
     grunt.task.run([
       'build_main_' + scriptLanguage,
@@ -9,74 +9,73 @@ module.exports = function(grunt) {
     ]);
   };
 
-  var browserTest = function(browserName) {
-    if (browserName) {
-      var scriptLanguage = grunt.task.current.name.split('_')[2];
-      var testName = 'test_browser';
-      grunt.config('karma.' + testName + '.browsers', [browserName]);
+  var testBrowser = function(browserName) {
+    var supportedBrowsers = ['Chrome', 'Firefox', 'IE', 'PhantomJS'];
 
-      grunt.task.run([
-        'build_main_' + scriptLanguage,
-        'build_test_' + scriptLanguage,
-        'karma:' + testName
-      ]);
+    if (browserName) {
+      var isSupported = false;
+      for (var length = supportedBrowsers.length, i = 0; i < length; i++) {
+        if (browserName === supportedBrowsers[i]) {
+          isSupported = true;
+        }
+      }
+
+      if (isSupported) {
+        var scriptLanguage = grunt.task.current.name.split('_')[2];
+        var testName = 'test_browser';
+        grunt.config('karma.' + testName + '.browsers', [browserName]);
+
+        grunt.task.run([
+          'build_main_' + scriptLanguage,
+          'build_test_' + scriptLanguage,
+          'karma:' + testName
+        ]);
+      } else {
+        grunt.log.writeln('Unsupported browser. Please use one of these: ' + supportedBrowsers.join(', '));
+      }
+
+
     } else {
       grunt.log.writeln('Please specify a browser like "Chrome" or "Firefox"');
     }
   };
 
-  // CoffeeScript
-  grunt.registerTask('test_browser_coffee', browserTest);
-  grunt.registerTask('test_headless_coffee', headLessTest);
-
-  grunt.registerTask('test_spec_coffee', function(testName) {
+  var testSpec = function(testName) {
     if (testName) {
-      grunt.task.run([
-        'newer:coffee:build_main_coffee',
-        'newer:coffee:build_test_coffee'
-      ]);
+      var scriptLanguage = grunt.task.current.name.split('_')[2];
+      if (scriptLanguage !== 'js') {
+        // Everything except JavaScript needs transpilation
+        grunt.task.run([
+          'newer:' + scriptLanguage + ':build_main_' + scriptLanguage,
+          'newer:' + scriptLanguage + ':build_test_' + scriptLanguage
+        ]);
+      }
 
-      var nextTask = 'test_headless_coffee';
-      var value = '<%= dir.build_test_coffee_jasmine_specs %>/' + testName + 'Spec.js';
-
-      grunt.config('jasmine.' + nextTask + '.options.specs', value);
-      grunt.task.run('jasmine:' + nextTask);
-    }
-  });
-
-  // JavaScript
-  grunt.registerTask('test_browser_js', browserTest);
-  grunt.registerTask('test_headless_js', headLessTest);
-
-  grunt.registerTask('test_spec_js', function(testName) {
-    if (testName) {
-      var nextTask = 'test_headless_js';
-      var value = '<%= dir.source_test_js_jasmine_specs %>/' + testName + 'Spec.js';
+      var nextTask = 'test_headless_' + scriptLanguage;
+      var value = '<%= dir.build_test_' + scriptLanguage + '_jasmine_specs %>/' + testName + '.js';
 
       grunt.config('jasmine.' + nextTask + '.options.specs', value);
       grunt.task.run(nextTask);
+    } else {
+      grunt.log.writeln('Please specify the relative path for a Jasmine specification like "Util/MyUtilSpec"');
     }
-  });
+  };
+
+  // CoffeeScript
+  grunt.registerTask('test_browser_coffee', testBrowser);
+  grunt.registerTask('test_headless_coffee', testHeadLess);
+  grunt.registerTask('test_spec_coffee', testSpec);
+
+  // JavaScript
+  grunt.registerTask('test_browser_js', testBrowser);
+  grunt.registerTask('test_headless_js', testHeadLess);
+  grunt.registerTask('test_spec_js', testSpec);
 
 
   // TypeScript
-  grunt.registerTask('test_browser_ts', browserTest);
-  grunt.registerTask('test_headless_ts', headLessTest);
-
-  grunt.registerTask('test_spec_ts', function(testName) {
-    if (testName) {
-      grunt.task.run([
-        'newer:ts:build_main_ts',
-        'newer:ts:build_test_ts'
-      ]);
-
-      var nextTask = 'test_headless_ts';
-      var value = '<%= dir.build_test_ts_jasmine_specs %>/' + testName + 'Spec.js';
-
-      grunt.config('jasmine.' + nextTask + '.options.specs', value);
-      grunt.task.run('jasmine:' + nextTask);
-    }
-  });
+  grunt.registerTask('test_browser_ts', testBrowser);
+  grunt.registerTask('test_headless_ts', testHeadLess);
+  grunt.registerTask('test_spec_ts', testSpec);
 
   // Default
   grunt.registerTask('test', function(option, scriptLanguage) {

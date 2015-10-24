@@ -40,6 +40,15 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.registerTask('test_browser_js', function(browserName) {
+    var scriptLanguage = grunt.task.current.name.split('_')[2];
+    grunt.task.run([
+      'build:main:' + scriptLanguage,
+      'build:test:' + scriptLanguage,
+      'karma:test_' + browserName.toLowerCase() + '_' + scriptLanguage
+    ]);
+  });
+
   // TypeScript
   grunt.registerTask('test_headless_ts', headLessTest);
 

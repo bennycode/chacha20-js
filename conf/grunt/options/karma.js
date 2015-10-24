@@ -2,16 +2,12 @@ module.exports = {
   options: {
     basePath: '',
     frameworks: ['jasmine'],
-    files: [
-      '<%= dir.external_libraries %>/**/*.js',
-      '<%= dir.source_code.js %>/**/*.js',
-      '<%= dir.jasmine.test_specifications %>/**/*Spec.js'
-    ],
+    files: [],
     exclude: [],
     preprocessors: {},
     reporters: ['progress'],
     coverageReporter: {
-      dir: '<%= dir.code_coverage_reports %>',
+      dir: '<%= dir.reports_coverage %>',
       reporters: [{
         type: 'html',
         subdir: 'html'
@@ -22,23 +18,30 @@ module.exports = {
     autoWatch: true,
     singleRun: true
   },
-  chrome: {
+  test_chrome_js: {
     browsers: ['Chrome'],
     preprocessors: {},
     reporters: ['progress'],
-    coverageReporter: {}
+    coverageReporter: {},
+    files: [{
+      src: [
+        '<%= dir.lib %>/**/*.js',
+        '<%= dir.source_main_js %>/**/*.js',
+        '<%= dir.source_test_js_jasmine_specs %>/**/*Spec.js'
+      ]
+    }]
   },
-  chrome_coverage: {
-    browsers: ['Chrome'],
-    preprocessors: {'<%= dir.source_code.js %>/**/*.js': ['coverage']},
-    reporters: ['progress', 'coverage']
-  },
-  phantom: {
-    browsers: ['PhantomJS']
-  },
-  phantom_coverage: {
-    browsers: ['PhantomJS'],
-    preprocessors: {'<%= dir.source_code.js %>/**/*.js': ['coverage']},
-    reporters: ['progress', 'coverage']
+  test_firefox_js: {
+    browsers: ['Firefox'],
+    preprocessors: {},
+    reporters: ['progress'],
+    coverageReporter: {},
+    files: [{
+      src: [
+        '<%= dir.lib %>/**/*.js',
+        '<%= dir.source_main_js %>/**/*.js',
+        '<%= dir.source_test_js_jasmine_specs %>/**/*Spec.js'
+      ]
+    }]
   }
 };

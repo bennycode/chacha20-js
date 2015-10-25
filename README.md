@@ -37,10 +37,10 @@ References:
     - `grunt build_test_js`
     - `grunt build_test_ts`
 - **test**
- - test_browser (*Run all unit tests with a real browser*)
-    - `grunt test_browser_coffee:Chrome`
-    - `grunt test_browser_js:PhantomJS`
-    - `grunt test_browser_ts:IE`
+ - test_specs-browser (*Run all unit tests with a real browser*)
+    - `grunt test_specs-browser_coffee:Chrome`
+    - `grunt test_specs-browser_js:PhantomJS`
+    - `grunt test_specs-browser_ts:IE`
  - test_end2end (*Run End-to-End tests on a development server*)
  - test_specs (*Run all unit tests with PhantomJS*)
     - `grunt test_specs_coffee`

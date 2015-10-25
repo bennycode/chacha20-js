@@ -43,8 +43,8 @@ module.exports = function(grunt) {
   var testSpec = function(testName) {
     if (testName) {
       var scriptLanguage = grunt.task.current.name.split('_')[2];
+      // JavaScript does not need transpilation but other scripting languages do
       if (scriptLanguage !== 'js') {
-        // Everything except JavaScript needs transpilation
         grunt.task.run([
           'newer:' + scriptLanguage + ':build_main_' + scriptLanguage,
           'newer:' + scriptLanguage + ':build_test_' + scriptLanguage
@@ -62,18 +62,18 @@ module.exports = function(grunt) {
   };
 
   // CoffeeScript
-  grunt.registerTask('test_browser_coffee', testBrowser);
+  grunt.registerTask('test_specs-browser_coffee', testBrowser);
   grunt.registerTask('test_specs_coffee', testHeadLess);
   grunt.registerTask('test_spec_coffee', testSpec);
 
   // JavaScript
-  grunt.registerTask('test_browser_js', testBrowser);
+  grunt.registerTask('test_specs-browser_js', testBrowser);
   grunt.registerTask('test_specs_js', testHeadLess);
   grunt.registerTask('test_spec_js', testSpec);
 
 
   // TypeScript
-  grunt.registerTask('test_browser_ts', testBrowser);
+  grunt.registerTask('test_specs-browser_ts', testBrowser);
   grunt.registerTask('test_specs_ts', testHeadLess);
   grunt.registerTask('test_spec_ts', testSpec);
 

@@ -5,6 +5,5 @@ module.exports = {
     }
   },
   check_demo_less: ['<%= dir.source_demo_less %>/**/*.less'],
-  check_main_less: ['<%= dir.source_main_less %>/**/*.less'],
-  check_test_less: ['<%= dir.source_test_less %>/**/*.less']
+  check_main_less: ['<%= dir.source_main_less %>/**/*.less']
 };

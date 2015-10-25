@@ -7,8 +7,5 @@ module.exports = {
   },
   check_main_css: {
     src: ['<%= dir.source_main_css %>/**/*.css']
-  },
-  check_test_css: {
-    src: ['<%= dir.source_test_css %>/**/*.css']
   }
 };

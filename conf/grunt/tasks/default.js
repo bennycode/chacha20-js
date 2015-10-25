@@ -11,7 +11,6 @@ module.exports = function(grunt) {
       // Check styles
       'check:demo:' + styleLanguage,
       'check:main:' + styleLanguage,
-      'check:test:' + styleLanguage,
       // Build scripts
       'build:demo',
       'build:main',

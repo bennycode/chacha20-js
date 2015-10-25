@@ -8,30 +8,18 @@
   "build_main_js": "src/main/js",
   "build_main_ts": "build/main/ts",
   "build_test": "build/test",
-  "build_test_js": "src/test/js",
-  "build_test_js_jasmine_specs": "src/test/js/jasmine/specs",
   "build_test_coffee": "build/test/coffee",
   "build_test_coffee_jasmine_specs": "build/test/coffee/jasmine/specs",
+  "build_test_js": "src/test/js",
+  "build_test_js_jasmine_specs": "src/test/js/jasmine/specs",
   "build_test_ts": "build/test/ts",
   "build_test_ts_jasmine_specs": "build/test/ts/jasmine/specs",
   "conf_linter": "conf/linter",
-  "reports_coverage": "reports/coverage",
-  "demo_code_root": "demo",
-  "demo_code": {
-    "style": {
-      "css": "demo/styles",
-      "scss": "src/demo/scss"
-    }
-  },
-  "distributables": "dist",
-  "documentation": "docs",
-  "nightwatch": {
-    "config": "conf/nightwatch",
-    "report": "test/nightwatch/report",
-    "screenshots": "test/nightwatch/screenshots",
-    "tests": "test/nightwatch/tests"
-  },
+  "conf_nightwatch": "conf/nightwatch",
+  "demo": "demo",
   "lib": "lib",
+  "reports_nightwatch": "reports/nightwatch",
+  "reports_nightwatch_screenshots": "reports/nightwatch/screenshots",
   "source_demo_coffee": "src/demo/coffee",
   "source_demo_css": "src/demo/css",
   "source_demo_js": "src/demo/js",
@@ -48,6 +36,7 @@
   "source_test_css": "src/test/css",
   "source_test_js": "src/test/js",
   "source_test_js_jasmine_specs": "src/test/js/jasmine/specs",
+  "source_test_js_nightwatch_tests": "src/test/js/nightwatch/tests",
   "source_test_less": "src/test/less",
   "source_test_sass": "src/test/sass",
   "source_test_ts": "src/test/ts"

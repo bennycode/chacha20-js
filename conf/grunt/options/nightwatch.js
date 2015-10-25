@@ -1,14 +1,13 @@
-// TODO: Create global variable for "launch_url" which can be used by other tasks
 module.exports = {
   options: {
     standalone: true,
     jar_url: 'https://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar',
-    globals_path: '<%= dir.nightwatch.config %>/globals.js',
-    src_folders: ['<%= dir.nightwatch.tests %>'],
-    output_folder: '<%= dir.nightwatch.reports %>',
+    globals_path: '<%= dir.conf_nightwatch %>/globals.js',
+    src_folders: ['<%= dir.source_test_js_nightwatch_tests %>'],
+    output_folder: '<%= dir.reports_nightwatch %>',
     "test_settings": {
       "default": {
-        "launch_url": 'http://localhost:<%= server.port.http %>/<%= dir.demo_code_root %>',
+        "launch_url": 'http://localhost:<%= server.port.http %>/<%= dir.demo %>',
         "selenium_host": "localhost",
         "selenium_port": '<%= server.port.selenium %>',
         "silent": true,
@@ -22,7 +21,7 @@ module.exports = {
           "enabled": true,
           "on_failure": true,
           "on_error": true,
-          "path": '<%= dir.nightwatch.screenshots %>'
+          "path": '<%= dir.reports_nightwatch_screenshots %>'
         }
       }
     },

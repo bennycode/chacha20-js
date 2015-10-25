@@ -61,7 +61,10 @@ References:
     - `grunt test_specs_browser_coffee:Chrome`
     - `grunt test_specs_browser_js:PhantomJS`
     - `grunt test_specs_browser_ts:IE`
- - test_end2end (*Run End-to-End tests on a development server*)
+ - test_e2e (*Run End-to-End tests on a development server*)
+    - `grunt test_e2e_coffee`
+    - `grunt test_e2e_js`
+	- `grunt test_e2e_ts`
 - **coverage**
 - **develop**
 - **docs**

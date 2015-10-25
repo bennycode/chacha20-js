@@ -46,7 +46,7 @@ References:
     - `grunt test_specs_js`
     - `grunt test_specs_ts`
  - test_spec-browser (*Run a specification test with a browser*)
- - test_spec-browsers (*Run all specification tests with a browser*)
+ - test_specs_browser (*Run all specification tests with a browser*)
     - `grunt test_specs-browser_coffee:Chrome`
     - `grunt test_specs-browser_js:PhantomJS`
     - `grunt test_specs-browser_ts:IE`

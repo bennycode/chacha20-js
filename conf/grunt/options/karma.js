@@ -3,11 +3,7 @@ module.exports = {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      '<%= dir.lib %>/**/*.js',
-      '<%= dir.build_main %>/**/*.js',
-      '<%= dir.build_test %>/**/*.js',
-      '<%= dir.source_main_js %>/**/*.js',
-      '<%= dir.source_test_js_jasmine_specs %>/**/*Spec.js'
+      '<%= dir.lib %>/**/*.js'
     ],
     exclude: [],
     preprocessors: {},
@@ -24,8 +20,16 @@ module.exports = {
     autoWatch: true,
     singleRun: true
   },
-  test_browser: {
+  test_specs_browser: {
     browsers: ['Chrome'],
-    coverageReporter: {}
+    coverageReporter: {},
+    files: [{
+      src: [
+        '<%= dir.build_main %>/**/*.js',
+        '<%= dir.build_test %>/**/*.js',
+        '<%= dir.source_main_js %>/**/*.js',
+        '<%= dir.source_test_js_jasmine_specs %>/**/*Spec.js'
+      ]
+    }]
   }
 };

@@ -3,15 +3,15 @@ module.exports = {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      '<%= dir.external_libraries %>/**/*.js',
-      '<%= dir.source_code.js %>/**/*.js',
-      '<%= dir.jasmine.test_specifications %>/**/*Spec.js'
+      '<%= dir.lib %>/**/*.js',
+      '<%= dir.build_main %>/**/*.js',
+      '<%= dir.source_main_js %>/**/*.js'
     ],
     exclude: [],
     preprocessors: {},
     reporters: ['progress'],
     coverageReporter: {
-      dir: '<%= dir.code_coverage_reports %>',
+      dir: '<%= dir.reports_coverage %>',
       reporters: [{
         type: 'html',
         subdir: 'html'
@@ -22,23 +22,14 @@ module.exports = {
     autoWatch: true,
     singleRun: true
   },
-  chrome: {
+  test_specs_browser: {
     browsers: ['Chrome'],
-    preprocessors: {},
-    reporters: ['progress'],
-    coverageReporter: {}
-  },
-  chrome_coverage: {
-    browsers: ['Chrome'],
-    preprocessors: {'<%= dir.source_code.js %>/**/*.js': ['coverage']},
-    reporters: ['progress', 'coverage']
-  },
-  phantom: {
-    browsers: ['PhantomJS']
-  },
-  phantom_coverage: {
-    browsers: ['PhantomJS'],
-    preprocessors: {'<%= dir.source_code.js %>/**/*.js': ['coverage']},
-    reporters: ['progress', 'coverage']
+    coverageReporter: {},
+    files: [{
+      src: [
+        '<%= dir.build_test %>/**/*.js',
+        '<%= dir.source_test_js_jasmine_specs %>/**/*Spec.js'
+      ]
+    }]
   }
 };

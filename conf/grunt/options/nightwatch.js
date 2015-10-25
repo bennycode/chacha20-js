@@ -5,7 +5,7 @@ module.exports = {
     jar_url: 'https://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar',
     globals_path: '<%= dir.nightwatch.config %>/globals.js',
     src_folders: ['<%= dir.nightwatch.tests %>'],
-    output_folder: '<%= dir.nightwatch.report %>',
+    output_folder: '<%= dir.nightwatch.reports %>',
     "test_settings": {
       "default": {
         "launch_url": 'http://localhost:<%= server.port.http %>/<%= dir.demo_code_root %>',

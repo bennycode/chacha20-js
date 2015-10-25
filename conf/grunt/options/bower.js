@@ -1,11 +1,11 @@
 module.exports = {
-  install: {
+  init: {
     options: {
       cleanTargetDir: true,
       cleanBowerDir: true,
       install: true,
       layout: 'byComponent',
-      targetDir: '<%= dir.external_libraries %>',
+      targetDir: '<%= dir.lib %>',
       verbose: true,
       bowerOptions: {
         forceLatest: true,

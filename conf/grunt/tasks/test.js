@@ -1,5 +1,48 @@
 module.exports = function(grunt) {
   // Helpers
+  var isSupportedBrowser = function(browserName) {
+    var isSupported = false;
+    var supportedBrowsers = ['Chrome', 'Firefox', 'IE', 'PhantomJS'];
+
+    if (browserName) {
+      for (var length = supportedBrowsers.length, i = 0; i < length; i++) {
+        if (browserName === supportedBrowsers[i]) {
+          isSupported = true;
+        }
+      }
+    }
+
+    return isSupported;
+  };
+
+  var startTranspilation = function(scriptLanguage) {
+    // JavaScript does not need transpilation
+    if (scriptLanguage !== 'js') {
+      grunt.task.run([
+        'newer:' + scriptLanguage + ':build_main_' + scriptLanguage,
+        'newer:' + scriptLanguage + ':build_test_' + scriptLanguage
+      ]);
+    }
+  };
+
+  // Tasks
+  var testSpec = function(testName) {
+    if (testName) {
+      // Parse info about the Grunt task
+      var parts = grunt.task.current.name.split('_');
+      var scriptLanguage = parts[parts.length - 1];
+      var nextTask = 'test_specs_' + scriptLanguage;
+      // Override task settings
+      var testName = '<%= dir.build_test_' + scriptLanguage + '_jasmine_specs %>/' + testName + '.js';
+      grunt.config('jasmine.' + nextTask + '.options.specs', testName);
+      // Run tasks
+      startTranspilation(scriptLanguage);
+      grunt.task.run(nextTask);
+    } else {
+      grunt.log.writeln('Please specify the relative path for a Jasmine specification like "Util/MyUtilSpec"');
+    }
+  };
+
   var testSpecs = function() {
     var parts = grunt.task.current.name.split('_');
     var scriptLanguage = parts[parts.length - 1];
@@ -10,70 +53,56 @@ module.exports = function(grunt) {
     ]);
   };
 
-  var testSpecsWithBrowser = function(browserName) {
-    var supportedBrowsers = ['Chrome', 'Firefox', 'IE', 'PhantomJS'];
-
-    if (browserName) {
-      var isSupported = false;
-      for (var length = supportedBrowsers.length, i = 0; i < length; i++) {
-        if (browserName === supportedBrowsers[i]) {
-          isSupported = true;
-        }
-      }
-
-      if (isSupported) {
-        var parts = grunt.task.current.name.split('_');
-        var scriptLanguage = parts[parts.length - 1];
-        var testName = 'test_specs_browser';
-        grunt.config('karma.' + testName + '.browsers', [browserName]);
-
-        grunt.task.run([
-          'build_main_' + scriptLanguage,
-          'build_test_' + scriptLanguage,
-          'karma:' + testName
-        ]);
-      } else {
-        grunt.log.writeln('Unsupported browser. Please use one of these: ' + supportedBrowsers.join(', '));
-      }
-
-
+  var testSpecWithBrowser = function(browserName, testName) {
+    if (isSupportedBrowser(browserName) && testName) {
+      // Get info about the Grunt task
+      var parts = grunt.task.current.name.split('_');
+      var scriptLanguage = parts[parts.length - 1];
+      var taskName = 'test_specs_browser';
+      // Override specification setting
+      var spec = '<%= dir.build_test_' + scriptLanguage + '_jasmine_specs %>/' + testName + '.js';
+      var files = [{
+        src: [spec]
+      }];
+      grunt.config('karma.' + taskName + '.files', files);
+      // Run tasks
+      startTranspilation(scriptLanguage);
+      grunt.task.run('karma:' + taskName);
     } else {
-      grunt.log.writeln('Please specify a browser like "Chrome" or "Firefox"');
+      grunt.log.writeln('Either you specified an unsupported browser ' +
+        'or you forgot to specify the test to be performed.');
     }
   };
 
-  var testSpec = function(testName) {
-    if (testName) {
+  var testSpecsWithBrowser = function(browserName) {
+    if (isSupportedBrowser(browserName)) {
+      // Parse info about the Grunt task
       var parts = grunt.task.current.name.split('_');
       var scriptLanguage = parts[parts.length - 1];
-      // JavaScript does not need transpilation but other scripting languages do
-      if (scriptLanguage !== 'js') {
-        grunt.task.run([
-          'newer:' + scriptLanguage + ':build_main_' + scriptLanguage,
-          'newer:' + scriptLanguage + ':build_test_' + scriptLanguage
-        ]);
-      }
-
-      var nextTask = 'test_specs_' + scriptLanguage;
-      var value = '<%= dir.build_test_' + scriptLanguage + '_jasmine_specs %>/' + testName + '.js';
-
-      grunt.config('jasmine.' + nextTask + '.options.specs', value);
-      grunt.task.run(nextTask);
+      // Override task settings
+      var testName = 'test_specs_browser';
+      grunt.config('karma.' + testName + '.browsers', [browserName]);
+      // Run tasks
+      grunt.task.run([
+        'build_main_' + scriptLanguage,
+        'build_test_' + scriptLanguage,
+        'karma:' + testName
+      ]);
     } else {
-      grunt.log.writeln('Please specify the relative path for a Jasmine specification like "Util/MyUtilSpec"');
+      grunt.log.writeln('Unsupported browser. Please use one of these: ' + supportedBrowsers.join(', '));
     }
   };
 
   // CoffeeScript
-  grunt.registerTask('test_specs_browser_coffee', testSpecsWithBrowser);
-  grunt.registerTask('test_specs_coffee', testSpecs);
   grunt.registerTask('test_spec_coffee', testSpec);
+  grunt.registerTask('test_specs_coffee', testSpecs);
+  grunt.registerTask('test_spec_browser_coffee', testSpecWithBrowser);
+  grunt.registerTask('test_specs_browser_coffee', testSpecsWithBrowser);
 
   // JavaScript
   grunt.registerTask('test_specs_browser_js', testSpecsWithBrowser);
   grunt.registerTask('test_specs_js', testSpecs);
   grunt.registerTask('test_spec_js', testSpec);
-
 
   // TypeScript
   grunt.registerTask('test_specs-browser_ts', testSpecsWithBrowser);

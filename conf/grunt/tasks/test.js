@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
   // Helpers
-  var testHeadLess = function() {
+  var testSpecs = function() {
     var scriptLanguage = grunt.task.current.name.split('_')[2];
     grunt.task.run([
       'build_main_' + scriptLanguage,
@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     ]);
   };
 
-  var testBrowser = function(browserName) {
+  var testSpecsWithBrowser = function(browserName) {
     var supportedBrowsers = ['Chrome', 'Firefox', 'IE', 'PhantomJS'];
 
     if (browserName) {
@@ -62,19 +62,19 @@ module.exports = function(grunt) {
   };
 
   // CoffeeScript
-  grunt.registerTask('test_specs-browser_coffee', testBrowser);
-  grunt.registerTask('test_specs_coffee', testHeadLess);
+  grunt.registerTask('test_specs-browser_coffee', testSpecsWithBrowser);
+  grunt.registerTask('test_specs_coffee', testSpecs);
   grunt.registerTask('test_spec_coffee', testSpec);
 
   // JavaScript
-  grunt.registerTask('test_specs-browser_js', testBrowser);
-  grunt.registerTask('test_specs_js', testHeadLess);
+  grunt.registerTask('test_specs-browser_js', testSpecsWithBrowser);
+  grunt.registerTask('test_specs_js', testSpecs);
   grunt.registerTask('test_spec_js', testSpec);
 
 
   // TypeScript
-  grunt.registerTask('test_specs-browser_ts', testBrowser);
-  grunt.registerTask('test_specs_ts', testHeadLess);
+  grunt.registerTask('test_specs-browser_ts', testSpecsWithBrowser);
+  grunt.registerTask('test_specs_ts', testSpecs);
   grunt.registerTask('test_spec_ts', testSpec);
 
   // Default

@@ -45,7 +45,10 @@ References:
     - `grunt test_specs_coffee`
     - `grunt test_specs_js`
     - `grunt test_specs_ts`
- - test_spec-browser (*Run a specification test with a browser*)
+ - test_spec_browser (*Run a specification test with a browser*)
+    - `grunt test_spec_browser_coffee:Chrome:Proteus/util/KeyDerivationUtilSpec`
+    - `grunt test_specs_browser_js:PhantomJS:de/bennyn/crypto/ChaCha20/ContextSpec`
+    - `grunt test_specs_browser_ts:IE:Validation/HelloWorldSpec`
  - test_specs_browser (*Run all specification tests with a browser*)
     - `grunt test_specs_browser_coffee:Chrome`
     - `grunt test_specs_browser_js:PhantomJS`

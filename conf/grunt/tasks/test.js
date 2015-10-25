@@ -65,6 +65,7 @@ module.exports = function(grunt) {
         src: [spec]
       }];
       grunt.config('karma.' + taskName + '.files', files);
+      grunt.config('karma.' + taskName + '.browsers', [browserName]);
       // Run tasks
       startTranspilation(scriptLanguage);
       grunt.task.run('karma:' + taskName);
@@ -80,13 +81,13 @@ module.exports = function(grunt) {
       var parts = grunt.task.current.name.split('_');
       var scriptLanguage = parts[parts.length - 1];
       // Override task settings
-      var testName = 'test_specs_browser';
-      grunt.config('karma.' + testName + '.browsers', [browserName]);
+      var taskName = 'test_specs_browser';
+      grunt.config('karma.' + taskName + '.browsers', [browserName]);
       // Run tasks
       grunt.task.run([
         'build_main_' + scriptLanguage,
         'build_test_' + scriptLanguage,
-        'karma:' + testName
+        'karma:' + taskName
       ]);
     } else {
       grunt.log.writeln('Unsupported browser. Please use one of these: ' + supportedBrowsers.join(', '));
@@ -100,14 +101,16 @@ module.exports = function(grunt) {
   grunt.registerTask('test_specs_browser_coffee', testSpecsWithBrowser);
 
   // JavaScript
-  grunt.registerTask('test_specs_browser_js', testSpecsWithBrowser);
-  grunt.registerTask('test_specs_js', testSpecs);
   grunt.registerTask('test_spec_js', testSpec);
+  grunt.registerTask('test_specs_js', testSpecs);
+  grunt.registerTask('test_spec_browser_js', testSpecWithBrowser);
+  grunt.registerTask('test_specs_browser_js', testSpecsWithBrowser);
 
   // TypeScript
-  grunt.registerTask('test_specs-browser_ts', testSpecsWithBrowser);
-  grunt.registerTask('test_specs_ts', testSpecs);
   grunt.registerTask('test_spec_ts', testSpec);
+  grunt.registerTask('test_specs_ts', testSpecs);
+  grunt.registerTask('test_spec_browser_ts', testSpecWithBrowser);
+  grunt.registerTask('test_specs_browser_ts', testSpecsWithBrowser);
 
   // Default
   grunt.registerTask('test', function(option, scriptLanguage) {

@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 
     grunt.task.run([
       'init',
-      // Check scripts
+      // Check & build scripts
       'check:demo',
       'check:main',
       'check:test',
@@ -15,6 +15,9 @@ module.exports = function(grunt) {
       'build:demo',
       'build:main',
       'build:test',
+      // Build styles
+      'build:demo:' + styleLanguage,
+      'build:main:' + styleLanguage,
       // Test scripts
       'test:specs'
     ]);

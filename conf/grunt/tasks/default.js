@@ -20,7 +20,7 @@ module.exports = function(grunt) {
       'build:main',
       'build:test',
       // Test
-      'test:headless'
+      'test:specs'
     ]);
   });
 };

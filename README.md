@@ -42,10 +42,10 @@ References:
     - `grunt test_browser_js:PhantomJS`
     - `grunt test_browser_ts:IE`
  - test_end2end (*Run End-to-End tests on a development server*)
- - test_headless (*Run all unit tests with PhantomJS*)
-    - `grunt test_headless_coffee`
-    - `grunt test_headless_js`
-    - `grunt test_headless_ts` 
+ - test_specs (*Run all unit tests with PhantomJS*)
+    - `grunt test_specs_coffee`
+    - `grunt test_specs_js`
+    - `grunt test_specs_ts` 
  - test_spec (*Run a specified unit test with PhantomJS*)
     - `grunt test_spec_coffee:Proteus/util/KeyDerivationUtilSpec` 
     - `grunt test_spec_js:de/bennyn/crypto/ChaCha20/ContextSpec` 

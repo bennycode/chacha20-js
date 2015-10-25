@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     grunt.task.run([
       'build_main_' + scriptLanguage,
       'build_test_' + scriptLanguage,
-      'jasmine:test_headless_' + scriptLanguage
+      'jasmine:test_specs_' + scriptLanguage
     ]);
   };
 
@@ -51,7 +51,7 @@ module.exports = function(grunt) {
         ]);
       }
 
-      var nextTask = 'test_headless_' + scriptLanguage;
+      var nextTask = 'test_specs_' + scriptLanguage;
       var value = '<%= dir.build_test_' + scriptLanguage + '_jasmine_specs %>/' + testName + '.js';
 
       grunt.config('jasmine.' + nextTask + '.options.specs', value);
@@ -63,18 +63,18 @@ module.exports = function(grunt) {
 
   // CoffeeScript
   grunt.registerTask('test_browser_coffee', testBrowser);
-  grunt.registerTask('test_headless_coffee', testHeadLess);
+  grunt.registerTask('test_specs_coffee', testHeadLess);
   grunt.registerTask('test_spec_coffee', testSpec);
 
   // JavaScript
   grunt.registerTask('test_browser_js', testBrowser);
-  grunt.registerTask('test_headless_js', testHeadLess);
+  grunt.registerTask('test_specs_js', testHeadLess);
   grunt.registerTask('test_spec_js', testSpec);
 
 
   // TypeScript
   grunt.registerTask('test_browser_ts', testBrowser);
-  grunt.registerTask('test_headless_ts', testHeadLess);
+  grunt.registerTask('test_specs_ts', testHeadLess);
   grunt.registerTask('test_spec_ts', testSpec);
 
   // Default
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
     grunt.log.writeln('=== ' + grunt.task.current.name.toUpperCase() + ' ===');
 
     if (option === undefined) {
-      option = 'headless';
+      option = 'specs';
     }
 
     var parts = [

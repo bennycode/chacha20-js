@@ -34,14 +34,19 @@ References:
 - **build**
  - build_demo (*Transpile demo code*)
     - `grunt build_demo_coffee`
+    - `grunt build_demo_css`
     - `grunt build_demo_js`
+    - `grunt build_demo_sass`
     - `grunt build_demo_ts`
  - build_main (*Transpile main code*)
     - `grunt build_main_coffee`
+    - `grunt build_main_css`
     - `grunt build_main_js`
+    - `grunt build_main_sass`
     - `grunt build_main_ts`
  - build_test (*Transpile test code*)
     - `grunt build_test_coffee`
+    - `grunt build_test_css`
     - `grunt build_test_js`
     - `grunt build_test_ts`
 - **test**

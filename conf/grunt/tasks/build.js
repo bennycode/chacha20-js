@@ -52,6 +52,29 @@ module.exports = function(grunt) {
     ]);
   });
 
+  // CSS
+  grunt.registerTask('build_demo_css', noOperation);
+  grunt.registerTask('build_main_css', noOperation);
+
+  // SASS
+  grunt.registerTask('build_demo_sass', function() {
+    grunt.task.run([
+      'clean:build_demo_sass',
+      'sass:build_demo_sass'
+    ]);
+  });
+
+  grunt.registerTask('build_main_sass', function() {
+    grunt.task.run([
+      'clean:build_main_sass',
+      'sass:build_main_sass'
+    ]);
+  });
+
+  // Less
+  grunt.registerTask('build_demo_less', noOperation);
+  grunt.registerTask('build_main_less', noOperation);
+
   // Default
   grunt.registerTask('build', function(option, scriptLanguage) {
     grunt.log.writeln('=== ' + grunt.task.current.name.toUpperCase() + ' ===');

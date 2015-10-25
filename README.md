@@ -26,7 +26,6 @@ References:
     - `grunt check_main_ts`
  - check_test (*Check code style for test code*)
     - `grunt check_test_coffee`
-    - `grunt check_test_css`
     - `grunt check_test_js`
     - `grunt check_test_less`
     - `grunt check_test_sass`

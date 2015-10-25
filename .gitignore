@@ -1,6 +1,7 @@
 **/*.baseDir.ts
 .idea/**/*.xml
 !.idea/codeStyleSettings.xml
+!.idea/watcherTasks.xml
 .grunt
 .sass-cache
 .tscache

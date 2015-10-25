@@ -1,16 +1,22 @@
 module.exports = function(grunt) {
   grunt.registerTask('default', 'Test app, transpile code and run development environment', function() {
+    var styleLanguage = grunt.config('style');
+
     grunt.task.run([
       'init',
-      // Check
+      // Check scripts
       'check:demo',
       'check:main',
       'check:test',
-      // Build
+      // Check styles
+      'check:demo:' + styleLanguage,
+      'check:main:' + styleLanguage,
+      'check:test:' + styleLanguage,
+      // Build scripts
       'build:demo',
       'build:main',
       'build:test',
-      // Test
+      // Test scripts
       'test:specs'
     ]);
   });

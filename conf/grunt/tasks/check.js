@@ -38,6 +38,45 @@ module.exports = function(grunt) {
     grunt.task.run(['tslint:check_test_ts']);
   });
 
+  // CSS
+  grunt.registerTask('check_demo_css', function() {
+    grunt.task.run('csslint:check_demo_css');
+  });
+
+  grunt.registerTask('check_main_css', function() {
+    grunt.task.run('csslint:check_main_css');
+  });
+
+  grunt.registerTask('check_test_css', function() {
+    grunt.task.run('csslint:check_test_css');
+  });
+
+  // SASS
+  grunt.registerTask('check_demo_sass', function() {
+    grunt.task.run('scsslint:check_demo_sass');
+  });
+
+  grunt.registerTask('check_main_sass', function() {
+    grunt.task.run('scsslint:check_main_sass');
+  });
+
+  grunt.registerTask('check_test_sass', function() {
+    grunt.task.run('scsslint:check_test_sass');
+  });
+
+  // Less
+  grunt.registerTask('check_demo_less', function() {
+    grunt.task.run('lesslint:check_demo_less');
+  });
+
+  grunt.registerTask('check_main_less', function() {
+    grunt.task.run('lesslint:check_main_less');
+  });
+
+  grunt.registerTask('check_test_less', function() {
+    grunt.task.run('lesslint:check_test_less');
+  });
+
   // Default
   grunt.registerTask('check', function(option, scriptLanguage) {
     grunt.log.writeln('=== ' + grunt.task.current.name.toUpperCase() + ' ===');

@@ -12,23 +12,31 @@ References:
 - **check**
  - check_demo (*Check code style for demo code*)
     - `grunt check_demo_coffee`
+    - `grunt check_demo_css`
     - `grunt check_demo_js`
+    - `grunt check_demo_less`
+    - `grunt check_demo_sass`
     - `grunt check_demo_ts`
- - check_main (*Check code style for source code*)
+ - check_main (*Check code style for main code*)
     - `grunt check_main_coffee`
+    - `grunt check_main_css`
     - `grunt check_main_js`
+    - `grunt check_main_less`
+    - `grunt check_main_sass`
     - `grunt check_main_ts`
- - check_style (*Check code style for stylesheets*)
  - check_test (*Check code style for test code*)
     - `grunt check_test_coffee`
+    - `grunt check_test_css`
     - `grunt check_test_js`
+    - `grunt check_test_less`
+    - `grunt check_test_sass`
     - `grunt check_test_ts`
 - **build**
  - build_demo (*Transpile demo code*)
     - `grunt build_demo_coffee`
     - `grunt build_demo_js`
     - `grunt build_demo_ts`
- - build_main (*Transpile source code*)
+ - build_main (*Transpile main code*)
     - `grunt build_main_coffee`
     - `grunt build_main_js`
     - `grunt build_main_ts`

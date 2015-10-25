@@ -26,6 +26,10 @@ module.exports = function(grunt) {
   };
 
   // Tasks
+  var testEndToEnd = function() {
+    grunt.task.run('nightwatch');
+  };
+
   var testSpec = function(testName) {
     if (testName) {
       // Parse info about the Grunt task
@@ -95,18 +99,21 @@ module.exports = function(grunt) {
   };
 
   // CoffeeScript
+  grunt.registerTask('test_e2e_coffee', testEndToEnd);
   grunt.registerTask('test_spec_coffee', testSpec);
   grunt.registerTask('test_specs_coffee', testSpecs);
   grunt.registerTask('test_spec_browser_coffee', testSpecWithBrowser);
   grunt.registerTask('test_specs_browser_coffee', testSpecsWithBrowser);
 
   // JavaScript
+  grunt.registerTask('test_e2e_js', testEndToEnd);
   grunt.registerTask('test_spec_js', testSpec);
   grunt.registerTask('test_specs_js', testSpecs);
   grunt.registerTask('test_spec_browser_js', testSpecWithBrowser);
   grunt.registerTask('test_specs_browser_js', testSpecsWithBrowser);
 
   // TypeScript
+  grunt.registerTask('test_e2e_ts', testEndToEnd);
   grunt.registerTask('test_spec_ts', testSpec);
   grunt.registerTask('test_specs_ts', testSpecs);
   grunt.registerTask('test_spec_browser_ts', testSpecWithBrowser);

@@ -64,6 +64,19 @@ module.exports = function(grunt) {
     grunt.task.run('scsslint:check_test_sass');
   });
 
+  // Less
+  grunt.registerTask('check_demo_less', function() {
+    grunt.task.run('lesslint:check_demo_less');
+  });
+
+  grunt.registerTask('check_main_less', function() {
+    grunt.task.run('lesslint:check_main_less');
+  });
+
+  grunt.registerTask('check_test_less', function() {
+    grunt.task.run('lesslint:check_test_less');
+  });
+
   // Default
   grunt.registerTask('check', function(option, scriptLanguage) {
     grunt.log.writeln('=== ' + grunt.task.current.name.toUpperCase() + ' ===');

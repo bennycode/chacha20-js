@@ -31,7 +31,7 @@ module.exports = function(grunt) {
   grunt.initConfig(config);
 
   grunt.config('script', 'ts');
-  grunt.config('style', 'sass');
+  grunt.config('style', 'less');
 
   // Events
   grunt.event.on('watch', function(action, filepath, target) {

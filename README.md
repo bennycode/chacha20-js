@@ -37,19 +37,20 @@ References:
     - `grunt build_test_js`
     - `grunt build_test_ts`
 - **test**
- - test_specs-browser (*Run all unit tests with a real browser*)
+ - test_spec (*Run a specification test with PhantomJS*)
+    - `grunt test_spec_coffee:Proteus/util/KeyDerivationUtilSpec` 
+    - `grunt test_spec_js:de/bennyn/crypto/ChaCha20/ContextSpec` 
+    - `grunt test_spec_ts:Validation/HelloWorldSpec`
+ - test_specs (*Run all specification tests with PhantomJS*)
+    - `grunt test_specs_coffee`
+    - `grunt test_specs_js`
+    - `grunt test_specs_ts`
+ - test_spec-browser (*Run a specification test with a browser*)
+ - test_spec-browsers (*Run all specification tests with a browser*)
     - `grunt test_specs-browser_coffee:Chrome`
     - `grunt test_specs-browser_js:PhantomJS`
     - `grunt test_specs-browser_ts:IE`
  - test_end2end (*Run End-to-End tests on a development server*)
- - test_specs (*Run all unit tests with PhantomJS*)
-    - `grunt test_specs_coffee`
-    - `grunt test_specs_js`
-    - `grunt test_specs_ts` 
- - test_spec (*Run a specified unit test with PhantomJS*)
-    - `grunt test_spec_coffee:Proteus/util/KeyDerivationUtilSpec` 
-    - `grunt test_spec_js:de/bennyn/crypto/ChaCha20/ContextSpec` 
-    - `grunt test_spec_ts:Validation/HelloWorldSpec`
 - **coverage**
 - **develop**
 - **docs**

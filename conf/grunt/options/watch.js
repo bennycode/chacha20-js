@@ -2,23 +2,16 @@ module.exports = {
   options: {
     livereload: true
   },
-  html: {
-    files: [
-      '<%= dir.demo_code_root %>/**/*.html'
-    ]
+  source_demo_coffee: {
+    files: ['<%= dir.source_demo_coffee %>/**/*.coffee'],
+    tasks: ['coffee:build_demo_coffee']
   },
-  js: {
-    files: [
-      '<%= dir.source_code.js %>/**/*.js'
-    ]
+  source_main_coffee: {
+    files: ['<%= dir.source_main_coffee %>/**/*.coffee'],
+    tasks: ['coffee:build_main_coffee']
   },
-  sass: {
-    files: [
-      '<%= dir.demo_code.style.scss %>/**/*.scss'
-    ],
-    options: {
-      livereload: true
-    },
-    tasks: ['sass:demo']
+  source_test_coffee: {
+    files: ['<%= dir.source_test_coffee %>/**/*.coffee'],
+    tasks: ['coffee:build_test_coffee']
   }
 };

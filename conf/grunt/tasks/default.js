@@ -20,7 +20,9 @@ module.exports = function(grunt) {
       'build:demo:' + styleLanguage,
       'build:main:' + styleLanguage,
       // Test scripts
-      'test:specs'
+      'test:specs',
+      // Run development environment
+      'dev'
     ]);
   });
 };

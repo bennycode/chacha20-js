@@ -2,9 +2,9 @@ module.exports = {
   options: {
     logConcurrentOutput: true
   },
-  nightwatch: {
+  test_e2e: {
     tasks: [
-      "connect:nightwatch:keepalive",
+      "connect:test_e2e:keepalive",
       "nightwatch:default"
     ]
   }

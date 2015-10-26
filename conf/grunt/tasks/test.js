@@ -27,7 +27,7 @@ module.exports = function(grunt) {
 
   // Tasks
   var testEndToEnd = function() {
-    grunt.task.run('nightwatch');
+    grunt.task.run('concurrent:test_e2e');
   };
 
   var testSpec = function(testName) {

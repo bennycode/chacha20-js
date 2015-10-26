@@ -1,3 +1,4 @@
+*.jar
 **/*.baseDir.ts
 .idea/**/*.xml
 !.idea/codeStyleSettings.xml

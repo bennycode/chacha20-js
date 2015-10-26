@@ -6,13 +6,13 @@ module.exports = {
       console.log('Serving on port: ' + options.port);
     }
   },
-  serve: {
+  dev: {
     options: {
       livereload: '<%= server.port.livereload %>',
-      open: 'http://localhost:<%= server.port.http %>/<%= dir.demo_code_root %>'
+      open: 'http://localhost:<%= server.port.http %>/<%= dir.demo %>'
     }
   },
-  nightwatch: {
+  test_e2e: {
     options: {
       livereload: false,
       open: false

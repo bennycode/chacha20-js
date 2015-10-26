@@ -3,6 +3,7 @@ module.exports = function(grunt) {
     var styleLanguage = grunt.config('style');
 
     grunt.task.run([
+      'david',
       'init',
       // Check & build scripts
       'check:demo',

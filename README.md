@@ -35,12 +35,14 @@ References:
     - `grunt build_demo_coffee`
     - `grunt build_demo_css`
     - `grunt build_demo_js`
+	- `grunt build_demo_less`
     - `grunt build_demo_sass`
     - `grunt build_demo_ts`
  - build_main (*Transpile main code*)
     - `grunt build_main_coffee`
     - `grunt build_main_css`
     - `grunt build_main_js`
+    - `grunt build_main_less`
     - `grunt build_main_sass`
     - `grunt build_main_ts`
  - build_test (*Transpile test code*)

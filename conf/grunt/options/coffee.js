@@ -6,6 +6,13 @@ module.exports = {
     ext: '.js',
     src: '**/*.coffee'
   },
+  build_lib_coffee: {
+    cwd: '<%= dir.lib %>',
+    dest: '<%= dir.build_lib_coffee %>',
+    expand: true,
+    ext: '.js',
+    src: '**/*.coffee'
+  },
   build_main_coffee: {
     cwd: '<%= dir.source_main_coffee %>',
     dest: '<%= dir.build_main_coffee %>',

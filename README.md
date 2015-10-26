@@ -38,6 +38,9 @@ References:
 	- `grunt build_demo_less`
     - `grunt build_demo_sass`
     - `grunt build_demo_ts`
+ - build_lib (*Transpile dependencies*)
+    - `grunt build_lib_coffee`
+    - `grunt build_lib_ts`
  - build_main (*Transpile main code*)
     - `grunt build_main_coffee`
     - `grunt build_main_css`

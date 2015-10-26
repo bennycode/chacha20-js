@@ -7,6 +7,13 @@ module.exports = function(grunt) {
     ]);
   });
 
+  grunt.registerTask('build_lib_coffee', function() {
+    grunt.task.run([
+      'clean:build_lib_coffee',
+      'coffee:build_lib_coffee'
+    ]);
+  });
+
   grunt.registerTask('build_main_coffee', function() {
     grunt.task.run([
       'clean:build_main_coffee',
@@ -36,6 +43,13 @@ module.exports = function(grunt) {
     grunt.task.run([
       'clean:build_demo_ts',
       'ts:build_demo_ts'
+    ]);
+  });
+
+  grunt.registerTask('build_lib_ts', function() {
+    grunt.task.run([
+      'clean:build_lib_ts',
+      'ts:build_lib_ts'
     ]);
   });
 

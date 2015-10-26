@@ -23,6 +23,23 @@ module.exports = {
           "on_error": true,
           "path": '<%= dir.reports_nightwatch_screenshots %>'
         }
+      },
+      "browserstack": {
+        "launch_url": "http://hub.browserstack.com",
+        "selenium_port": 80,
+        "selenium_host": "hub.browserstack.com",
+        "silent": true,
+        "screenshots": {
+          "enabled": false,
+          "path": ""
+        },
+        "desiredCapabilities": {
+          "browserName": "chrome",
+          "javascriptEnabled": true,
+          "acceptSslCerts": true,
+          "browserstack.user": "",
+          "browserstack.key": ""
+        }
       }
     },
     "selenium": {

@@ -23,8 +23,25 @@ module.exports = {
           "on_error": true,
           "path": '<%= dir.reports_nightwatch_screenshots %>'
         }
-      },
-      "browserstack": {
+      }
+    },
+    "selenium": {
+      "host": "127.0.0.1",
+      "port": '<%= server.port.selenium %>',
+      "cli_args": {
+        "webdriver.chrome.driver": "",
+        "webdriver.ie.driver": ""
+      }
+    }
+  },
+  "browserstack": {
+    standalone: true,
+    jar_url: 'https://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar',
+    globals_path: '<%= dir.conf_nightwatch %>/globals.js',
+    src_folders: ['<%= dir.source_test_js_nightwatch_tests %>'],
+    output_folder: '<%= dir.reports_nightwatch %>',
+    "test_settings": {
+      "default": {
         "launch_url": "http://hub.browserstack.com",
         "selenium_port": 80,
         "selenium_host": "hub.browserstack.com",
@@ -43,12 +60,9 @@ module.exports = {
       }
     },
     "selenium": {
-      "host": "127.0.0.1",
-      "port": '<%= server.port.selenium %>',
-      "cli_args": {
-        "webdriver.chrome.driver": "",
-        "webdriver.ie.driver": ""
-      }
+      "start_process": false,
+      "host": "hub.browserstack.com",
+      "port": 80
     }
   }
 };

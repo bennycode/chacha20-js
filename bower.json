@@ -11,5 +11,8 @@
     "crypto",
     "salsa20",
     "algorithm"
-  ]
+  ],
+  "dependencies": {
+    "lesshat": "git@github.com:madebysource/lesshat.git#3.0.2"
+  }
 }

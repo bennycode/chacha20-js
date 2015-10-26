@@ -27,6 +27,7 @@ module.exports = function(grunt) {
   };
 
   grunt.registerTask('build_demo_js', noOperation);
+  grunt.registerTask('build_lib_js', noOperation);
   grunt.registerTask('build_main_js', noOperation);
   grunt.registerTask('build_test_js', noOperation);
 
@@ -72,8 +73,19 @@ module.exports = function(grunt) {
   });
 
   // Less
-  grunt.registerTask('build_demo_less', noOperation);
-  grunt.registerTask('build_main_less', noOperation);
+  grunt.registerTask('build_demo_less', function() {
+    grunt.task.run([
+      'clean:build_demo_less',
+      'less:build_demo_less'
+    ]);
+  });
+
+  grunt.registerTask('build_main_less', function() {
+    grunt.task.run([
+      'clean:build_main_less',
+      'less:build_main_less'
+    ]);
+  });
 
   // Default
   grunt.registerTask('build', function(option, scriptLanguage) {
